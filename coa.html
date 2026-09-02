@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verificar Certificado de Análisis — Nexopep</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12201E; --teal-deep:#0B5D57; --teal-bright:#17A398;
+    --paper:#F7F8F6; --steel:#AEB6B8; --white:#FFFFFF; --line:rgba(18,32,30,0.12);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"IBM Plex Sans", sans-serif; min-height:100vh;
+  }
+  .mono{ font-family:"IBM Plex Mono", monospace; }
+  header{ border-bottom:1px solid var(--line); padding:18px 24px; }
+  .brand{ display:flex; align-items:center; gap:8px; text-decoration:none; color:var(--ink); }
+  .brand span{ font-family:"Space Grotesk"; font-weight:700; font-size:1rem; }
+  main{ max-width:640px; margin:0 auto; padding:48px 24px 80px; }
+
+  .state{ display:none; }
+  .state.active{ display:block; }
+
+  .card{
+    background:var(--white); border:1px solid var(--line); border-radius:2px; overflow:hidden;
+  }
+  .card-head{ background:var(--teal-deep); color:var(--white); padding:22px 26px; }
+  .card-head .eyebrow{ font-family:"IBM Plex Mono"; font-size:0.78rem; opacity:0.85; margin-bottom:6px; }
+  .card-head h1{ font-family:"Space Grotesk"; font-size:1.5rem; margin:0; }
+  .card-body{ padding:26px; }
+  .meta-row{ display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--line); font-size:0.92rem; }
+  .meta-row:last-of-type{ border-bottom:none; }
+  .meta-row .label{ color:rgba(18,32,30,0.55); }
+  .meta-row .value{ font-family:"IBM Plex Mono"; font-weight:600; }
+
+  .coa-image-wrap{ margin-top:22px; border:1px solid var(--line); }
+  .coa-image-wrap img{ width:100%; display:block; }
+  .coa-actions{ display:flex; gap:12px; margin-top:16px; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:11px 18px;
+    font-weight:600; font-size:0.9rem; text-decoration:none; border-radius:2px; border:1px solid transparent;
+  }
+  .btn-solid{ background:var(--ink); color:var(--white); }
+  .btn-line{ border-color:var(--ink); color:var(--ink); }
+
+  .badge{
+    display:inline-block; margin-top:14px; font-family:"IBM Plex Mono"; font-size:0.78rem;
+    background:rgba(23,163,152,0.12); color:var(--teal-deep); padding:5px 10px; border-radius:2px;
+  }
+
+  /* Not found / not configured */
+  .notice{
+    background:var(--white); border:1px solid var(--line); padding:30px; text-align:left;
+  }
+  .notice h2{ font-family:"Space Grotesk"; font-size:1.2rem; margin:0 0 10px; }
+  .notice p{ font-size:0.92rem; color:rgba(18,32,30,0.7); margin:0 0 16px; }
+
+  .search-again{ margin-top:26px; }
+  .search-again form{ display:flex; gap:10px; }
+  .search-again input{
+    flex:1; padding:12px 14px; border:1px solid var(--steel); font-family:"IBM Plex Mono"; font-size:0.9rem;
+  }
+  .search-again button{
+    background:var(--ink); color:var(--white); border:none; padding:0 18px; font-weight:600; cursor:pointer;
+  }
+
+  footer{ text-align:center; padding:24px; font-size:0.78rem; color:rgba(18,32,30,0.5); }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="index.html">
+    <svg width="18" height="18" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="26,4 46,15 46,37 26,48 6,37 6,15" fill="none" stroke="#0B5D57" stroke-width="8"/>
+      <polygon points="26,54 46,65 46,87 26,98 6,87 6,65" fill="#17A398"/>
+    </svg>
+    <span>NEXOPEP</span>
+  </a>
+</header>
+
+<main>
+
+  <div class="state" id="state-loading">
+    <div class="notice">
+      <h2>Buscando el certificado…</h2>
+      <p>Esto solo toma un momento.</p>
+    </div>
+  </div>
+
+  <div class="state" id="state-not-configured">
+    <div class="notice">
+      <h2>Sistema de certificados en configuración</h2>
+      <p>Nexopep aún no ha conectado la fuente de certificados. Si tienes dudas sobre un lote específico, escríbenos directamente por WhatsApp.</p>
+      <a class="btn btn-solid" id="wa-notconfigured" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="state" id="state-empty">
+    <div class="notice">
+      <h2>Ingresa tu número de lote</h2>
+      <p>Escribe el código de lote impreso en la etiqueta de tu vial para ver su Certificado de Análisis.</p>
+      <div class="search-again">
+        <form id="form-empty">
+          <input type="text" class="mono" id="input-empty" placeholder="Ej. NXP-0824-A" required>
+          <button type="submit">Buscar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="state" id="state-notfound">
+    <div class="notice">
+      <h2>No encontramos ese lote</h2>
+      <p>Revisa que el código coincida exactamente con el de tu etiqueta. Si el problema continúa, contáctanos y lo verificamos manualmente.</p>
+      <div class="search-again">
+        <form id="form-notfound">
+          <input type="text" class="mono" id="input-notfound" placeholder="Ej. NXP-0824-A" required>
+          <button type="submit">Buscar</button>
+        </form>
+      </div>
+      <a class="btn btn-line" style="margin-top:16px;" id="wa-notfound" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="state" id="state-found">
+    <div class="card">
+      <div class="card-head">
+        <div class="eyebrow mono" id="found-lote"></div>
+        <h1 id="found-name"></h1>
+      </div>
+      <div class="card-body">
+        <div class="meta-row"><span class="label">Concentración</span><span class="value" id="found-mg"></span></div>
+        <div class="meta-row"><span class="label">Fecha de análisis</span><span class="value" id="found-fecha"></span></div>
+        <div class="meta-row"><span class="label">Lote</span><span class="value" id="found-lote2"></span></div>
+        <span class="badge">Certificado verificado</span>
+
+        <div class="coa-image-wrap">
+          <img id="found-img" src="" alt="Certificado de Análisis">
+        </div>
+        <div class="coa-actions">
+          <a class="btn btn-solid" id="found-download" href="#" download target="_blank" rel="noopener">Descargar certificado</a>
+          <a class="btn btn-line" id="found-wa" href="#" target="_blank" rel="noopener">Consultar este producto</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>Nexopep · Uso exclusivo para investigación</footer>
+
+<script src="config.js"></script>
+<script>
+  if (typeof NEXOPEP_CONFIG === 'undefined') {
+    window.NEXOPEP_CONFIG = { whatsapp: "59168237696", sheetCsvUrl: "", siteUrl: "" };
+  }
+
+  function showState(id){
+    document.querySelectorAll('.state').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  function waLink(text){
+    return `https://wa.me/${NEXOPEP_CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
+  }
+  document.getElementById('wa-notconfigured').href = waLink("Hola Nexopep, quisiera consultar sobre el certificado de un lote.");
+  document.getElementById('wa-notfound').href = waLink("Hola Nexopep, no encontré el certificado de mi lote en la página.");
+
+  // --- Simple CSV parser (handles quoted fields) ---
+  function parseCSV(text){
+    const rows = [];
+    let row = [], field = '', inQuotes = false;
+    for(let i=0; i<text.length; i++){
+      const c = text[i];
+      if(inQuotes){
+        if(c === '"'){
+          if(text[i+1] === '"'){ field += '"'; i++; }
+          else{ inQuotes = false; }
+        } else field += c;
+      } else {
+        if(c === '"') inQuotes = true;
+        else if(c === ','){ row.push(field); field=''; }
+        else if(c === '\n'){ row.push(field); rows.push(row); row=[]; field=''; }
+        else if(c === '\r'){ /* skip */ }
+        else field += c;
+      }
+    }
+    if(field.length || row.length){ row.push(field); rows.push(row); }
+    return rows.filter(r => r.some(c => c.trim() !== ''));
+  }
+
+  function normalize(str){
+    return (str || '').trim().toLowerCase();
+  }
+
+  async function init(){
+    const params = new URLSearchParams(window.location.search);
+    const lote = params.get('lote') || params.get('lot');
+
+    if(!NEXOPEP_CONFIG.sheetCsvUrl){
+      showState('state-not-configured');
+      return;
+    }
+
+    if(!lote){
+      showState('state-empty');
+      return;
+    }
+
+    showState('state-loading');
+
+    try{
+      const res = await fetch(NEXOPEP_CONFIG.sheetCsvUrl, {cache:'no-store'});
+      const text = await res.text();
+      const rows = parseCSV(text);
+      const header = rows[0].map(h => normalize(h));
+      const idxLote = header.indexOf('lote');
+      const idxPeptido = header.indexOf('peptido');
+      const idxMg = header.indexOf('mg');
+      const idxFecha = header.indexOf('fecha');
+      const idxImagen = header.indexOf('imagen_url');
+
+      const match = rows.slice(1).find(r => normalize(r[idxLote]) === normalize(lote));
+
+      if(!match){
+        showState('state-notfound');
+        return;
+      }
+
+      document.getElementById('found-lote').textContent = 'LOTE ' + match[idxLote];
+      document.getElementById('found-lote2').textContent = match[idxLote];
+      document.getElementById('found-name').textContent = match[idxPeptido] + ' — ' + match[idxMg];
+      document.getElementById('found-mg').textContent = match[idxMg];
+      document.getElementById('found-fecha').textContent = match[idxFecha] || '—';
+      document.getElementById('found-img').src = match[idxImagen];
+      document.getElementById('found-download').href = match[idxImagen];
+      document.getElementById('found-wa').href = waLink(`Hola Nexopep, tengo una consulta sobre el lote ${match[idxLote]} (${match[idxPeptido]}).`);
+
+      showState('state-found');
+    } catch(err){
+      console.error(err);
+      showState('state-notfound');
+    }
+  }
+
+  document.getElementById('form-empty').addEventListener('submit', function(e){
+    e.preventDefault();
+    const v = document.getElementById('input-empty').value.trim();
+    if(v) window.location.href = `coa.html?lote=${encodeURIComponent(v)}`;
+  });
+  document.getElementById('form-notfound').addEventListener('submit', function(e){
+    e.preventDefault();
+    const v = document.getElementById('input-notfound').value.trim();
+    if(v) window.location.href = `coa.html?lote=${encodeURIComponent(v)}`;
+  });
+
+  init();
+</script>
+
+</body>
+</html>
