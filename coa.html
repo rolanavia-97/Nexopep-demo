@@ -36,13 +36,24 @@
   .meta-row .label{ color:rgba(18,32,30,0.55); }
   .meta-row .value{ font-family:"IBM Plex Mono"; font-weight:600; }
 
-  .coa-viewer-wrap{ margin-top:22px; border:1px solid var(--line); background:#f0f0f0; min-height:420px; position:relative; }
-  .coa-viewer-wrap img{ width:100%; display:block; }
+  .coa-viewer-wrap{
+    margin-top:22px; border:1px solid var(--line); background:#f0f0f0;
+    min-height:420px; position:relative;
+    /* Bloquea clic derecho visual y selección */
+    user-select:none; -webkit-user-select:none;
+  }
+  .coa-viewer-wrap img{ width:100%; display:block; pointer-events:none; }
   .coa-viewer-wrap iframe{ width:100%; height:600px; border:none; display:block; }
+  /* Overlay transparente encima del iframe — impide abrir ventana emergente
+     haciendo clic en los controles nativos del visor de Drive/PDF */
+  .coa-viewer-wrap .iframe-shield{
+    position:absolute; top:0; left:0; width:100%; height:100%;
+    z-index:10; background:transparent; cursor:default;
+  }
   .coa-viewer-wrap .viewer-error{
     padding:32px; text-align:center; font-size:0.88rem; color:rgba(18,32,30,0.6);
   }
-  .coa-viewer-wrap .viewer-error a{ color:var(--teal-deep); font-weight:600; }
+  /* Quitamos .coa-actions del flujo; el botón de WhatsApp queda solo */
   .coa-actions{ display:flex; gap:12px; margin-top:16px; flex-wrap:wrap; }
   .btn{
     display:inline-flex; align-items:center; gap:8px; padding:11px 18px;
@@ -145,7 +156,6 @@
 
         <div class="coa-viewer-wrap" id="coa-viewer"></div>
         <div class="coa-actions">
-          <a class="btn btn-solid" id="found-download" href="#" target="_blank" rel="noopener">Descargar certificado</a>
           <a class="btn btn-line" id="found-wa" href="#" target="_blank" rel="noopener">Consultar este producto</a>
         </div>
       </div>
@@ -243,53 +253,56 @@
 
       const rawUrl = match[idxImagen].trim();
 
-      // ---------- Normalizar link de Google Drive ----------
-      // Drive links de tipo /file/d/ID/view  →  usamos /preview para embeber
-      // y /uc?export=download&id=ID para descargar
       function driveFileId(url){
         const m = url.match(/\/d\/([a-zA-Z0-9_-]{20,})/);
         return m ? m[1] : null;
       }
       const driveId = driveFileId(rawUrl);
       const isPdf = rawUrl.toLowerCase().includes('.pdf') ||
-                    rawUrl.toLowerCase().includes('export=download') ||
-                    (match[idxImagen].toLowerCase().includes('pdf'));
+                    rawUrl.toLowerCase().includes('export=download');
 
-      let embedUrl, downloadUrl;
-
+      let embedUrl;
       if(driveId){
-        embedUrl    = `https://drive.google.com/file/d/${driveId}/preview`;
-        downloadUrl = `https://drive.google.com/uc?export=download&id=${driveId}`;
+        embedUrl = `https://drive.google.com/file/d/${driveId}/preview`;
       } else {
-        embedUrl    = rawUrl;
-        downloadUrl = rawUrl;
+        embedUrl = rawUrl;
       }
 
-      document.getElementById('found-download').href = downloadUrl;
-
-      // ---------- Mostrar el visor correcto ----------
       const viewer = document.getElementById('coa-viewer');
 
       if(driveId || isPdf){
-        // PDF o archivo Drive → iframe con la URL de preview
+        // iframe con overlay encima para bloquear los controles nativos
         const iframe = document.createElement('iframe');
         iframe.src = embedUrl;
         iframe.title = 'Certificado de Análisis';
         iframe.allow = 'autoplay';
         viewer.appendChild(iframe);
+
+        // Shield: div transparente encima que captura los clics
+        // e impide acceder a "Abrir en nueva pestaña" o "Descargar"
+        // de la barra de herramientas nativa del visor de Drive
+        const shield = document.createElement('div');
+        shield.className = 'iframe-shield';
+        shield.addEventListener('contextmenu', e => e.preventDefault());
+        viewer.appendChild(shield);
       } else {
-        // Imagen directa (Imgur, GitHub, etc.)
+        // Imagen directa: sin clic derecho, sin arrastrar
         const img = document.createElement('img');
         img.alt = 'Certificado de Análisis';
         img.src = embedUrl;
+        img.draggable = false;
+        img.addEventListener('contextmenu', e => e.preventDefault());
         img.onerror = () => {
           viewer.innerHTML = `<div class="viewer-error">
-            No se pudo mostrar el certificado en esta vista previa.<br><br>
-            <a href="${downloadUrl}" target="_blank" rel="noopener">Haz clic aquí para abrirlo directamente →</a>
+            No se pudo mostrar el certificado en esta vista previa.<br>
+            Contacta a Nexopep por WhatsApp para más información.
           </div>`;
         };
         viewer.appendChild(img);
       }
+
+      // Bloquear clic derecho en toda la sección del certificado
+      viewer.addEventListener('contextmenu', e => e.preventDefault());
 
       showState('state-found');
     } catch(err){
