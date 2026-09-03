@@ -36,8 +36,13 @@
   .meta-row .label{ color:rgba(18,32,30,0.55); }
   .meta-row .value{ font-family:"IBM Plex Mono"; font-weight:600; }
 
-  .coa-image-wrap{ margin-top:22px; border:1px solid var(--line); }
-  .coa-image-wrap img{ width:100%; display:block; }
+  .coa-viewer-wrap{ margin-top:22px; border:1px solid var(--line); background:#f0f0f0; min-height:420px; position:relative; }
+  .coa-viewer-wrap img{ width:100%; display:block; }
+  .coa-viewer-wrap iframe{ width:100%; height:600px; border:none; display:block; }
+  .coa-viewer-wrap .viewer-error{
+    padding:32px; text-align:center; font-size:0.88rem; color:rgba(18,32,30,0.6);
+  }
+  .coa-viewer-wrap .viewer-error a{ color:var(--teal-deep); font-weight:600; }
   .coa-actions{ display:flex; gap:12px; margin-top:16px; flex-wrap:wrap; }
   .btn{
     display:inline-flex; align-items:center; gap:8px; padding:11px 18px;
@@ -138,11 +143,9 @@
         <div class="meta-row"><span class="label">Lote</span><span class="value" id="found-lote2"></span></div>
         <span class="badge">Certificado verificado</span>
 
-        <div class="coa-image-wrap">
-          <img id="found-img" src="" alt="Certificado de Análisis">
-        </div>
+        <div class="coa-viewer-wrap" id="coa-viewer"></div>
         <div class="coa-actions">
-          <a class="btn btn-solid" id="found-download" href="#" download target="_blank" rel="noopener">Descargar certificado</a>
+          <a class="btn btn-solid" id="found-download" href="#" target="_blank" rel="noopener">Descargar certificado</a>
           <a class="btn btn-line" id="found-wa" href="#" target="_blank" rel="noopener">Consultar este producto</a>
         </div>
       </div>
@@ -236,9 +239,57 @@
       document.getElementById('found-name').textContent = match[idxPeptido] + ' — ' + match[idxMg];
       document.getElementById('found-mg').textContent = match[idxMg];
       document.getElementById('found-fecha').textContent = match[idxFecha] || '—';
-      document.getElementById('found-img').src = match[idxImagen];
-      document.getElementById('found-download').href = match[idxImagen];
       document.getElementById('found-wa').href = waLink(`Hola Nexopep, tengo una consulta sobre el lote ${match[idxLote]} (${match[idxPeptido]}).`);
+
+      const rawUrl = match[idxImagen].trim();
+
+      // ---------- Normalizar link de Google Drive ----------
+      // Drive links de tipo /file/d/ID/view  →  usamos /preview para embeber
+      // y /uc?export=download&id=ID para descargar
+      function driveFileId(url){
+        const m = url.match(/\/d\/([a-zA-Z0-9_-]{20,})/);
+        return m ? m[1] : null;
+      }
+      const driveId = driveFileId(rawUrl);
+      const isPdf = rawUrl.toLowerCase().includes('.pdf') ||
+                    rawUrl.toLowerCase().includes('export=download') ||
+                    (match[idxImagen].toLowerCase().includes('pdf'));
+
+      let embedUrl, downloadUrl;
+
+      if(driveId){
+        embedUrl    = `https://drive.google.com/file/d/${driveId}/preview`;
+        downloadUrl = `https://drive.google.com/uc?export=download&id=${driveId}`;
+      } else {
+        embedUrl    = rawUrl;
+        downloadUrl = rawUrl;
+      }
+
+      document.getElementById('found-download').href = downloadUrl;
+
+      // ---------- Mostrar el visor correcto ----------
+      const viewer = document.getElementById('coa-viewer');
+
+      if(driveId || isPdf){
+        // PDF o archivo Drive → iframe con la URL de preview
+        const iframe = document.createElement('iframe');
+        iframe.src = embedUrl;
+        iframe.title = 'Certificado de Análisis';
+        iframe.allow = 'autoplay';
+        viewer.appendChild(iframe);
+      } else {
+        // Imagen directa (Imgur, GitHub, etc.)
+        const img = document.createElement('img');
+        img.alt = 'Certificado de Análisis';
+        img.src = embedUrl;
+        img.onerror = () => {
+          viewer.innerHTML = `<div class="viewer-error">
+            No se pudo mostrar el certificado en esta vista previa.<br><br>
+            <a href="${downloadUrl}" target="_blank" rel="noopener">Haz clic aquí para abrirlo directamente →</a>
+          </div>`;
+        };
+        viewer.appendChild(img);
+      }
 
       showState('state-found');
     } catch(err){
