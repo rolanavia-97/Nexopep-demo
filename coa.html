@@ -39,21 +39,28 @@
   .coa-viewer-wrap{
     margin-top:22px; border:1px solid var(--line); background:#f0f0f0;
     min-height:420px; position:relative;
-    /* Bloquea clic derecho visual y selección */
     user-select:none; -webkit-user-select:none;
   }
   .coa-viewer-wrap img{ width:100%; display:block; pointer-events:none; }
   .coa-viewer-wrap iframe{ width:100%; height:600px; border:none; display:block; }
-  /* Overlay transparente encima del iframe — impide abrir ventana emergente
-     haciendo clic en los controles nativos del visor de Drive/PDF */
-  .coa-viewer-wrap .iframe-shield{
-    position:absolute; top:0; left:0; width:100%; height:100%;
+  /*
+    En vez de un overlay full, usamos DOS franjas delgadas:
+    - .shield-top  cubre la barra de herramientas superior de Drive (~40px)
+    - .shield-bot  cubre los controles de descarga inferiores (~40px)
+    La zona del medio queda libre: el usuario puede hacer scroll,
+    cambiar de página y leer el PDF con normalidad.
+  */
+  .coa-viewer-wrap .shield-top,
+  .coa-viewer-wrap .shield-bot{
+    position:absolute; left:0; width:100%;
     z-index:10; background:transparent; cursor:default;
+    pointer-events:all;
   }
+  .coa-viewer-wrap .shield-top{ top:0;    height:44px; }
+  .coa-viewer-wrap .shield-bot{ bottom:0; height:44px; }
   .coa-viewer-wrap .viewer-error{
     padding:32px; text-align:center; font-size:0.88rem; color:rgba(18,32,30,0.6);
   }
-  /* Quitamos .coa-actions del flujo; el botón de WhatsApp queda solo */
   .coa-actions{ display:flex; gap:12px; margin-top:16px; flex-wrap:wrap; }
   .btn{
     display:inline-flex; align-items:center; gap:8px; padding:11px 18px;
@@ -278,13 +285,14 @@
         iframe.allow = 'autoplay';
         viewer.appendChild(iframe);
 
-        // Shield: div transparente encima que captura los clics
-        // e impide acceder a "Abrir en nueva pestaña" o "Descargar"
-        // de la barra de herramientas nativa del visor de Drive
-        const shield = document.createElement('div');
-        shield.className = 'iframe-shield';
-        shield.addEventListener('contextmenu', e => e.preventDefault());
-        viewer.appendChild(shield);
+        // Dos franjas que tapan solo la barra superior e inferior de Drive
+        // dejando libre la zona central para navegar páginas y hacer scroll
+        ['shield-top','shield-bot'].forEach(cls => {
+          const s = document.createElement('div');
+          s.className = cls;
+          s.addEventListener('contextmenu', e => e.preventDefault());
+          viewer.appendChild(s);
+        });
       } else {
         // Imagen directa: sin clic derecho, sin arrastrar
         const img = document.createElement('img');
