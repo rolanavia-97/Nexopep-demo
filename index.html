@@ -8,21 +8,69 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* ─── TOKENS ─────────────────────────────────────────────── */
+/* ─── TOKENS — MODO DÍA (predeterminado) ─────────────────── */
 :root{
+  --black:   #F4F3EF;
+  --ink:     #EDECEA;
+  --teal:    #0B5D57;
+  --teal-d:  #0B5D57;
+  --gold:    #8B6A3A;
+  --paper:   #1A1A18;
+  --smoke:   #2A2A27;
+  --mist:    #5A5956;
+  --line:    rgba(10,10,10,0.10);
+  --white:   #0A0A0A;
+  --maxw:    1140px;
+  --nav-h:   64px;
+  /* nav específico */
+  --nav-bg:  rgba(244,243,239,0.92);
+  --nav-line:rgba(10,10,10,0.08);
+  /* hero */
+  --hero-h1: #0A0A0A;
+  --hero-em: #0B5D57;
+  --hero-grid-op: 0.06;
+  --hero-bg1: rgba(11,93,87,0.10);
+  --hero-bg2: rgba(23,163,152,0.05);
+  /* cards */
+  --vcard-bg:     #FFFFFF;
+  --vcard-hover:  #F7F6F2;
+  --vcard-img-bg1:#F0EFEB;
+  --vcard-img-bg2:#E8E6E1;
+  /* about */
+  --about-h2: #0A0A0A;
+  /* result */
+  --result-body-bg: rgba(10,10,10,0.03);
+  /* coa viewer */
+  --viewer-bg: #E8E6E1;
+  /* footer */
+  --foot-bg: #F4F3EF;
+}
+/* ─── MODO NOCHE ──────────────────────────────────────────── */
+[data-theme="dark"]{
   --black:   #0A0A0A;
   --ink:     #111110;
   --teal:    #17A398;
   --teal-d:  #0B5D57;
-  --gold:    #C9A96E;
   --paper:   #F7F6F2;
   --smoke:   #E8E6E1;
   --mist:    #9A9893;
   --line:    rgba(255,255,255,0.08);
-  --line-l:  rgba(10,10,10,0.10);
   --white:   #FFFFFF;
-  --maxw:    1140px;
-  --nav-h:   64px;
+  --nav-bg:  rgba(10,10,10,0.88);
+  --nav-line:rgba(255,255,255,0.08);
+  --hero-h1: #FFFFFF;
+  --hero-em: #17A398;
+  --hero-grid-op: 0.04;
+  --hero-bg1: rgba(11,93,87,0.22);
+  --hero-bg2: rgba(23,163,152,0.08);
+  --vcard-bg:     #111110;
+  --vcard-hover:  #161614;
+  --vcard-img-bg1:#1A1A18;
+  --vcard-img-bg2:#111110;
+  --about-h2: #FFFFFF;
+  --result-body-bg: rgba(255,255,255,0.03);
+  --viewer-bg: #0D0D0B;
+  --foot-bg: #0A0A0A;
 }
 *{ box-sizing:border-box; margin:0; padding:0; }
 html{ scroll-behavior:smooth; }
@@ -32,6 +80,7 @@ body{
   font-weight:300; line-height:1.6;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
+  transition: background .3s, color .3s;
 }
 .serif{ font-family:"Cormorant Garamond", serif; }
 .mono{ font-family:"IBM Plex Mono", monospace; }
@@ -43,10 +92,11 @@ img{ max-width:100%; display:block; }
 nav{
   position:fixed; top:0; left:0; right:0; z-index:100;
   height:var(--nav-h);
-  background:rgba(10,10,10,0.88);
+  background:var(--nav-bg);
   backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--line);
+  border-bottom:1px solid var(--nav-line);
   display:flex; align-items:center;
+  transition: background .3s, border-color .3s;
 }
 .nav-inner{
   max-width:var(--maxw); margin:0 auto; padding:0 32px;
@@ -78,6 +128,20 @@ nav{
   display:flex; align-items:center; gap:7px;
 }
 .nav-cta:hover{ background:var(--teal); }
+
+/* ─── THEME TOGGLE ───────────────────────────────────────── */
+.theme-toggle{
+  background:none; border:1px solid var(--nav-line); cursor:pointer;
+  width:36px; height:36px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--mist); transition:border-color .2s, color .2s, background .2s;
+  flex:none;
+}
+.theme-toggle:hover{ border-color:var(--teal); color:var(--teal); }
+.theme-toggle .icon-sun{ display:none; }
+.theme-toggle .icon-moon{ display:block; }
+[data-theme="dark"] .theme-toggle .icon-sun{ display:block; }
+[data-theme="dark"] .theme-toggle .icon-moon{ display:none; }
 
 /* mobile menu */
 .hamburger{
@@ -114,40 +178,50 @@ nav{
 /* ─── HERO ───────────────────────────────────────────────── */
 .hero{
   position:relative; height:calc(100vh - var(--nav-h));
-  min-height:560px; display:flex; align-items:center;
+  min-height:580px; display:flex; align-items:center;
   overflow:hidden;
 }
 .hero-bg{
   position:absolute; inset:0;
-  background:radial-gradient(ellipse 70% 70% at 65% 50%, rgba(11,93,87,0.22) 0%, transparent 70%),
-             radial-gradient(ellipse 40% 60% at 20% 80%, rgba(23,163,152,0.08) 0%, transparent 60%),
+  background:radial-gradient(ellipse 60% 70% at 70% 50%, var(--hero-bg1) 0%, transparent 70%),
+             radial-gradient(ellipse 40% 50% at 15% 80%, var(--hero-bg2) 0%, transparent 60%),
              var(--black);
+  transition: background .3s;
 }
 .hero-grid{
-  position:absolute; inset:0; opacity:0.04;
+  position:absolute; inset:0;
+  opacity:var(--hero-grid-op);
   background-image:
-    linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px);
+    linear-gradient(var(--paper) 1px, transparent 1px),
+    linear-gradient(90deg, var(--paper) 1px, transparent 1px);
   background-size:60px 60px;
+  transition: opacity .3s;
 }
-.hero-content{ position:relative; z-index:2; max-width:640px; }
+/* Two-column hero layout */
+.hero-inner{
+  position:relative; z-index:2; width:100%; max-width:var(--maxw);
+  margin:0 auto; padding:0 32px;
+  display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;
+}
+.hero-content{ }
 .hero-eyebrow{
   display:flex; align-items:center; gap:10px; margin-bottom:28px;
   font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal);
 }
 .hero-eyebrow::before{ content:''; width:28px; height:1px; background:var(--teal); }
 .hero h1{
-  font-family:"Cormorant Garamond"; font-size:clamp(2.8rem,6vw,5rem);
-  font-weight:400; line-height:1.05; letter-spacing:-0.01em; color:var(--white);
+  font-family:"Cormorant Garamond"; font-size:clamp(2.6rem,5.5vw,4.6rem);
+  font-weight:400; line-height:1.05; letter-spacing:-0.01em; color:var(--hero-h1);
+  transition: color .3s;
 }
-.hero h1 em{ font-style:italic; color:var(--teal); }
+.hero h1 em{ font-style:italic; color:var(--hero-em); transition: color .3s; }
 .hero-sub{
   margin-top:24px; font-size:0.95rem; color:var(--mist);
   max-width:420px; line-height:1.7;
 }
 .hero-ctas{ display:flex; gap:14px; margin-top:40px; flex-wrap:wrap; }
 .btn-primary{
-  background:var(--teal-d); color:var(--white);
+  background:var(--teal-d); color:#fff;
   padding:14px 28px; font-size:0.82rem; font-weight:500;
   letter-spacing:0.1em; text-transform:uppercase; border-radius:2px;
   cursor:pointer; border:none; display:inline-flex; align-items:center; gap:8px;
@@ -155,13 +229,22 @@ nav{
 }
 .btn-primary:hover{ background:var(--teal); }
 .btn-ghost{
-  border:1px solid rgba(255,255,255,0.2); color:var(--paper);
+  border:1px solid rgba(128,128,128,0.3); color:var(--paper);
   padding:14px 28px; font-size:0.82rem; font-weight:400;
   letter-spacing:0.1em; text-transform:uppercase; border-radius:2px;
   cursor:pointer; background:none; display:inline-flex; align-items:center; gap:8px;
   transition:border-color .2s, color .2s;
 }
 .btn-ghost:hover{ border-color:var(--teal); color:var(--teal); }
+/* Big logo on the right */
+.hero-logo-right{
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+}
+.hero-logo-right svg{
+  width:min(340px, 40vw); height:auto; opacity:0.92;
+  filter:drop-shadow(0 0 60px rgba(23,163,152,0.18));
+}
 .hero-scroll{
   position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
   z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px;
@@ -169,6 +252,10 @@ nav{
 }
 .hero-scroll::after{
   content:''; display:block; width:1px; height:36px; background:var(--mist); opacity:0.5;
+}
+@media(max-width:760px){
+  .hero-inner{ grid-template-columns:1fr; }
+  .hero-logo-right{ display:none; }
 }
 
 /* ─── STATS STRIP ─────────────────────────────────────────── */
@@ -196,7 +283,8 @@ nav{
 }
 .about h2{
   font-family:"Cormorant Garamond"; font-size:2.6rem;
-  font-weight:400; line-height:1.15; color:var(--white);
+  font-weight:400; line-height:1.15; color:var(--about-h2);
+  transition: color .3s;
 }
 .about-divider{ width:40px; height:1px; background:var(--teal); margin:28px 0; }
 .about p{ color:var(--mist); font-size:0.95rem; line-height:1.8; margin-bottom:16px; }
@@ -233,12 +321,12 @@ nav{
   background:var(--line); margin-top:1px;
 }
 .vcard{
-  background:var(--ink); display:flex; flex-direction:column;
+  background:var(--vcard-bg); display:flex; flex-direction:column;
   transition:background .25s;
 }
-.vcard:hover{ background:#161614; }
+.vcard:hover{ background:var(--vcard-hover); }
 .vcard-img{
-  background:linear-gradient(180deg,#1A1A18 0%,#111110 100%);
+  background:linear-gradient(180deg,var(--vcard-img-bg1) 0%,var(--vcard-img-bg2) 100%);
   height:240px; display:flex; align-items:center; justify-content:center;
   overflow:hidden; border-bottom:1px solid var(--line);
 }
@@ -349,9 +437,10 @@ nav{
   padding:5px 12px; margin-bottom:22px;
 }
 .coa-viewer-wrap{
-  border:1px solid var(--line); background:#0D0D0B;
+  border:1px solid var(--line); background:var(--viewer-bg);
   min-height:300px; position:relative;
   user-select:none; -webkit-user-select:none;
+  transition: background .3s;
 }
 .coa-viewer-wrap img{ width:100%; display:block; pointer-events:none; }
 .coa-viewer-wrap iframe{ width:100%; height:620px; border:none; display:block; }
@@ -466,6 +555,12 @@ footer{
         <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.9 2.9 4.6 4 .6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.1.2-1.3-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.4c1.4.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.6-1.3l-.3-.2-3 .8.8-2.9-.2-.3C3.9 15 3.4 13.5 3.4 12c0-4.7 3.9-8.6 8.6-8.6s8.6 3.9 8.6 8.6-3.9 8.6-8.6 8.6z"/></svg>
         Consultar
       </button>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
+        <!-- sol = modo día visible cuando estamos en dark -->
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <!-- luna = modo noche visible cuando estamos en light -->
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
     </div>
     <button class="hamburger" onclick="toggleMenu()" aria-label="Menú">
       <span></span><span></span><span></span>
@@ -491,13 +586,69 @@ footer{
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-grid"></div>
-    <div class="wrap hero-content">
-      <div class="hero-eyebrow">Péptidos para investigación</div>
-      <h1>Ciencia de precisión.<br><em>Pureza verificable.</em></h1>
-      <p class="hero-sub">Nexopep distribuye péptidos con pureza HPLC >99%. Cada lote viene respaldado por su Certificado de Análisis, verificable en esta página.</p>
-      <div class="hero-ctas">
-        <button class="btn-primary" onclick="showPage('catalog')">Ver catálogo</button>
-        <button class="btn-ghost"   onclick="showPage('coa')">Verificar COA</button>
+    <div class="hero-inner">
+      <!-- Izquierda: texto -->
+      <div class="hero-content">
+        <div class="hero-eyebrow">Péptidos para investigación</div>
+        <h1>Ciencia de<br>precisión.<br><em>Pureza<br>verificable.</em></h1>
+        <p class="hero-sub">Nexopep distribuye péptidos con pureza HPLC >99%. Cada lote viene respaldado por su Certificado de Análisis, verificable en esta página.</p>
+        <div class="hero-ctas">
+          <button class="btn-primary" onclick="showPage('catalog')">Ver catálogo</button>
+          <button class="btn-ghost"   onclick="showPage('coa')">Verificar COA</button>
+        </div>
+      </div>
+      <!-- Derecha: logo grande -->
+      <div class="hero-logo-right">
+        <svg viewBox="0 0 320 380" xmlns="http://www.w3.org/2000/svg">
+          <!-- hexágonos grandes estructurales -->
+          <polygon points="160,18 230,58 230,138 160,178 90,138 90,58"
+            fill="none" stroke="#17A398" stroke-width="1.5" opacity="0.25"/>
+          <polygon points="160,38 214,68 214,128 160,158 106,128 106,68"
+            fill="none" stroke="#17A398" stroke-width="1" opacity="0.15"/>
+          <!-- hex sólido teal — arriba izquierda -->
+          <polygon points="80,60 116,80 116,120 80,140 44,120 44,80"
+            fill="#17A398" opacity="0.12"/>
+          <polygon points="80,60 116,80 116,120 80,140 44,120 44,80"
+            fill="none" stroke="#17A398" stroke-width="2"/>
+          <!-- hex outline — arriba derecha -->
+          <polygon points="240,60 276,80 276,120 240,140 204,120 204,80"
+            fill="none" stroke="#0B5D57" stroke-width="2"/>
+          <!-- hex sólido pequeño — abajo izq -->
+          <polygon points="80,200 116,220 116,260 80,280 44,260 44,220"
+            fill="#0B5D57" opacity="0.7"/>
+          <!-- hex outline fino — abajo der -->
+          <polygon points="240,200 276,220 276,260 240,280 204,260 204,220"
+            fill="none" stroke="#17A398" stroke-width="1.5" opacity="0.4"/>
+          <!-- hex central grande — marco del logo -->
+          <polygon points="160,100 214,130 214,190 160,220 106,190 106,130"
+            fill="#0B5D57" opacity="0.08"/>
+          <polygon points="160,100 214,130 214,190 160,220 106,190 106,130"
+            fill="none" stroke="#17A398" stroke-width="2.5"/>
+          <!-- Texto NEXOPEP centrado -->
+          <text x="160" y="168" text-anchor="middle"
+            font-family="IBM Plex Sans, sans-serif" font-size="18"
+            font-weight="600" letter-spacing="6" fill="#17A398">NEXOPEP</text>
+          <!-- líneas de conexión -->
+          <line x1="116" y1="100" x2="106" y2="130" stroke="#17A398" stroke-width="1" opacity="0.3"/>
+          <line x1="204" y1="100" x2="214" y2="130" stroke="#17A398" stroke-width="1" opacity="0.3"/>
+          <line x1="80" y1="140" x2="106" y2="160" stroke="#0B5D57" stroke-width="1" opacity="0.4"/>
+          <line x1="240" y1="140" x2="214" y2="160" stroke="#0B5D57" stroke-width="1" opacity="0.4"/>
+          <line x1="106" y1="190" x2="80" y2="200" stroke="#17A398" stroke-width="1" opacity="0.3"/>
+          <line x1="214" y1="190" x2="240" y2="200" stroke="#17A398" stroke-width="1" opacity="0.3"/>
+          <!-- puntos de unión -->
+          <circle cx="160" cy="100" r="3" fill="#17A398" opacity="0.6"/>
+          <circle cx="160" cy="220" r="3" fill="#17A398" opacity="0.6"/>
+          <circle cx="106" cy="130" r="2" fill="#0B5D57"/>
+          <circle cx="214" cy="130" r="2" fill="#0B5D57"/>
+          <circle cx="106" cy="190" r="2" fill="#0B5D57"/>
+          <circle cx="214" cy="190" r="2" fill="#0B5D57"/>
+          <!-- etiqueta pureza abajo -->
+          <text x="160" y="320" text-anchor="middle"
+            font-family="IBM Plex Mono, monospace" font-size="11"
+            letter-spacing="3" fill="#17A398" opacity="0.7">HPLC &gt;99%</text>
+          <line x1="80" y1="312" x2="130" y2="312" stroke="#17A398" stroke-width="0.8" opacity="0.3"/>
+          <line x1="190" y1="312" x2="240" y2="312" stroke="#17A398" stroke-width="0.8" opacity="0.3"/>
+        </svg>
       </div>
     </div>
     <div class="hero-scroll">Scroll</div>
@@ -751,6 +902,24 @@ footer{
 <script src="config.js"></script>
 <script>
 if(typeof NEXOPEP_CONFIG==='undefined') window.NEXOPEP_CONFIG={whatsapp:'59168237696',sheetCsvUrl:'',siteUrl:''};
+
+// ── Theme toggle (predeterminado: modo día) ──
+const root = document.documentElement;
+const toggleBtn = document.getElementById('theme-toggle');
+// Leer preferencia guardada; si no hay, modo día
+const savedTheme = localStorage.getItem('nexopep-theme') || 'light';
+if(savedTheme === 'dark') root.setAttribute('data-theme','dark');
+
+toggleBtn.addEventListener('click', () => {
+  const isDark = root.getAttribute('data-theme') === 'dark';
+  if(isDark){
+    root.removeAttribute('data-theme');
+    localStorage.setItem('nexopep-theme','light');
+  } else {
+    root.setAttribute('data-theme','dark');
+    localStorage.setItem('nexopep-theme','dark');
+  }
+});
 
 const WA = NEXOPEP_CONFIG.whatsapp;
 function waLink(t){ return `https://wa.me/${WA}?text=${encodeURIComponent(t)}`; }
