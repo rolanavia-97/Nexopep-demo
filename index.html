@@ -2,513 +2,919 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexopep — Péptidos para investigación</title>
-<meta name="description" content="Nexopep distribuye péptidos para investigación con Certificado de Análisis verificable por número de lote. Consultas por WhatsApp.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Nexopep — Péptidos de investigación</title>
+<meta name="description" content="Nexopep — Péptidos para investigación con pureza HPLC >99%. Certificado de análisis verificable por número de lote.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink:#12201E;
-    --teal-deep:#0B5D57;
-    --teal-bright:#17A398;
-    --paper:#F7F8F6;
-    --steel:#AEB6B8;
-    --white:#FFFFFF;
-    --line: rgba(18,32,30,0.12);
-    --maxw: 1120px;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:"IBM Plex Sans", sans-serif;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3{
-    font-family:"Space Grotesk", sans-serif;
-    margin:0;
-    color:var(--ink);
-    letter-spacing:-0.01em;
-  }
-  .mono{ font-family:"IBM Plex Mono", monospace; }
-  a{ color:inherit; }
-  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
-  img{ max-width:100%; display:block; }
+/* ─── TOKENS ─────────────────────────────────────────────── */
+:root{
+  --black:   #0A0A0A;
+  --ink:     #111110;
+  --teal:    #17A398;
+  --teal-d:  #0B5D57;
+  --gold:    #C9A96E;
+  --paper:   #F7F6F2;
+  --smoke:   #E8E6E1;
+  --mist:    #9A9893;
+  --line:    rgba(255,255,255,0.08);
+  --line-l:  rgba(10,10,10,0.10);
+  --white:   #FFFFFF;
+  --maxw:    1140px;
+  --nav-h:   64px;
+}
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+body{
+  background:var(--black); color:var(--paper);
+  font-family:"IBM Plex Sans", sans-serif;
+  font-weight:300; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+.serif{ font-family:"Cormorant Garamond", serif; }
+.mono{ font-family:"IBM Plex Mono", monospace; }
+.wrap{ max-width:var(--maxw); margin:0 auto; padding:0 32px; }
+a{ color:inherit; text-decoration:none; }
+img{ max-width:100%; display:block; }
 
-  /* ---------- Header ---------- */
-  header{
-    position:sticky; top:0; z-index:50;
-    background:rgba(247,248,246,0.92);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);
-  }
-  .headbar{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:16px 28px; max-width:var(--maxw); margin:0 auto;
-  }
-  .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
-  .brand span{ font-family:"Space Grotesk"; font-weight:700; font-size:1.15rem; letter-spacing:0.02em; }
-  nav{ display:flex; align-items:center; gap:28px; }
-  nav a{ text-decoration:none; font-size:0.95rem; font-weight:500; color:var(--ink); opacity:0.8; }
-  nav a:hover{ opacity:1; }
-  .btn{
-    display:inline-flex; align-items:center; gap:8px;
-    padding:11px 20px; border-radius:3px;
-    font-weight:600; font-size:0.92rem; text-decoration:none;
-    border:1px solid transparent; cursor:pointer;
-  }
-  .btn-solid{ background:var(--teal-deep); color:var(--white); }
-  .btn-solid:hover{ background:var(--ink); }
-  .btn-line{ border-color:var(--ink); color:var(--ink); }
-  .btn-line:hover{ background:var(--ink); color:var(--white); }
+/* ─── NAV ────────────────────────────────────────────────── */
+nav{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  height:var(--nav-h);
+  background:rgba(10,10,10,0.88);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+  display:flex; align-items:center;
+}
+.nav-inner{
+  max-width:var(--maxw); margin:0 auto; padding:0 32px;
+  width:100%; display:flex; align-items:center; justify-content:space-between;
+}
+.brand{
+  display:flex; align-items:center; gap:10px; cursor:pointer;
+}
+.brand-name{
+  font-family:"IBM Plex Sans"; font-weight:500;
+  font-size:1rem; letter-spacing:0.12em; color:var(--paper);
+}
+.nav-links{ display:flex; align-items:center; gap:8px; }
+.nav-btn{
+  background:none; border:none; cursor:pointer;
+  font-family:"IBM Plex Sans"; font-weight:400;
+  font-size:0.82rem; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--mist); padding:8px 14px; border-radius:2px;
+  transition:color .2s, background .2s;
+}
+.nav-btn:hover{ color:var(--paper); }
+.nav-btn.active{ color:var(--paper); background:rgba(255,255,255,0.06); }
+.nav-cta{
+  background:var(--teal-d); color:var(--white);
+  border:none; cursor:pointer;
+  font-family:"IBM Plex Sans"; font-weight:500;
+  font-size:0.8rem; letter-spacing:0.08em; text-transform:uppercase;
+  padding:10px 18px; border-radius:2px; transition:background .2s;
+  display:flex; align-items:center; gap:7px;
+}
+.nav-cta:hover{ background:var(--teal); }
 
-  /* ---------- Hero ---------- */
-  .hero{
-    display:grid; grid-template-columns: 1.15fr 0.85fr; gap:48px;
-    align-items:center;
-    padding:76px 0 64px;
-    border-bottom:1px solid var(--line);
-  }
-  .eyebrow-line{
-    display:flex; align-items:center; gap:10px; margin-bottom:22px;
-    font-family:"IBM Plex Mono"; font-size:0.8rem; color:var(--teal-deep);
-  }
-  .eyebrow-line .dot{ width:7px; height:7px; border-radius:50%; background:var(--teal-bright); }
-  .hero h1{
-    font-size:3.1rem; line-height:1.08; font-weight:700; max-width:620px;
-  }
-  .hero p.lead{
-    margin-top:22px; font-size:1.12rem; max-width:480px; color:rgba(18,32,30,0.75);
-  }
-  .hero-ctas{ display:flex; gap:14px; margin-top:34px; flex-wrap:wrap; }
-  .hero-art{ position:relative; display:flex; justify-content:center; }
+/* mobile menu */
+.hamburger{
+  display:none; flex-direction:column; gap:5px; cursor:pointer;
+  background:none; border:none; padding:4px;
+}
+.hamburger span{ display:block; width:22px; height:1.5px; background:var(--paper); }
+.mobile-menu{
+  display:none; position:fixed; top:var(--nav-h); left:0; right:0; bottom:0;
+  background:var(--ink); z-index:99; padding:32px;
+  flex-direction:column; gap:6px;
+}
+.mobile-menu.open{ display:flex; }
+.mob-btn{
+  background:none; border:none; cursor:pointer;
+  font-family:"IBM Plex Sans"; font-weight:400;
+  font-size:1rem; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--mist); padding:16px 0; border-bottom:1px solid var(--line);
+  text-align:left;
+}
+.mob-btn.active{ color:var(--paper); }
+.mob-cta{
+  margin-top:24px; background:var(--teal-d); color:var(--white);
+  border:none; cursor:pointer; padding:16px;
+  font-family:"IBM Plex Sans"; font-weight:500;
+  font-size:0.9rem; letter-spacing:0.06em; text-transform:uppercase;
+  text-align:center;
+}
 
-  /* ---------- Info strip ---------- */
-  .strip{
-    display:grid; grid-template-columns: repeat(3,1fr);
-    border-bottom:1px solid var(--line);
-  }
-  .strip div{
-    padding:26px 28px; border-left:1px solid var(--line);
-  }
-  .strip div:first-child{ border-left:none; }
-  .strip h3{ font-size:0.95rem; margin-bottom:6px; }
-  .strip p{ margin:0; font-size:0.88rem; color:rgba(18,32,30,0.65); }
+/* ─── PAGES ──────────────────────────────────────────────── */
+.page{ display:none; padding-top:var(--nav-h); min-height:100vh; }
+.page.active{ display:block; }
 
-  /* ---------- Sobre Nexopep ---------- */
-  .about{ padding:80px 0; border-bottom:1px solid var(--line); }
-  .about-grid{ display:grid; grid-template-columns: 0.9fr 1.4fr; gap:56px; }
-  .about h2{ font-size:1.9rem; max-width:280px; }
-  .about-body p{ margin:0 0 16px; max-width:560px; color:rgba(18,32,30,0.78); }
-  .about-body p:last-child{ margin-bottom:0; }
+/* ─── HERO ───────────────────────────────────────────────── */
+.hero{
+  position:relative; height:calc(100vh - var(--nav-h));
+  min-height:560px; display:flex; align-items:center;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse 70% 70% at 65% 50%, rgba(11,93,87,0.22) 0%, transparent 70%),
+             radial-gradient(ellipse 40% 60% at 20% 80%, rgba(23,163,152,0.08) 0%, transparent 60%),
+             var(--black);
+}
+.hero-grid{
+  position:absolute; inset:0; opacity:0.04;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px);
+  background-size:60px 60px;
+}
+.hero-content{ position:relative; z-index:2; max-width:640px; }
+.hero-eyebrow{
+  display:flex; align-items:center; gap:10px; margin-bottom:28px;
+  font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal);
+}
+.hero-eyebrow::before{ content:''; width:28px; height:1px; background:var(--teal); }
+.hero h1{
+  font-family:"Cormorant Garamond"; font-size:clamp(2.8rem,6vw,5rem);
+  font-weight:400; line-height:1.05; letter-spacing:-0.01em; color:var(--white);
+}
+.hero h1 em{ font-style:italic; color:var(--teal); }
+.hero-sub{
+  margin-top:24px; font-size:0.95rem; color:var(--mist);
+  max-width:420px; line-height:1.7;
+}
+.hero-ctas{ display:flex; gap:14px; margin-top:40px; flex-wrap:wrap; }
+.btn-primary{
+  background:var(--teal-d); color:var(--white);
+  padding:14px 28px; font-size:0.82rem; font-weight:500;
+  letter-spacing:0.1em; text-transform:uppercase; border-radius:2px;
+  cursor:pointer; border:none; display:inline-flex; align-items:center; gap:8px;
+  transition:background .2s;
+}
+.btn-primary:hover{ background:var(--teal); }
+.btn-ghost{
+  border:1px solid rgba(255,255,255,0.2); color:var(--paper);
+  padding:14px 28px; font-size:0.82rem; font-weight:400;
+  letter-spacing:0.1em; text-transform:uppercase; border-radius:2px;
+  cursor:pointer; background:none; display:inline-flex; align-items:center; gap:8px;
+  transition:border-color .2s, color .2s;
+}
+.btn-ghost:hover{ border-color:var(--teal); color:var(--teal); }
+.hero-scroll{
+  position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
+  z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px;
+  font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--mist);
+}
+.hero-scroll::after{
+  content:''; display:block; width:1px; height:36px; background:var(--mist); opacity:0.5;
+}
 
-  /* ---------- Catálogo ---------- */
-  .catalog{ padding:80px 0; border-bottom:1px solid var(--line); }
-  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px; gap:24px; flex-wrap:wrap; }
-  .section-head h2{ font-size:1.9rem; }
-  .section-head p{ margin:8px 0 0; color:rgba(18,32,30,0.65); max-width:420px; font-size:0.95rem; }
+/* ─── STATS STRIP ─────────────────────────────────────────── */
+.stats{
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  display:grid; grid-template-columns:repeat(4,1fr);
+}
+.stat-cell{
+  padding:28px 32px; border-right:1px solid var(--line);
+  display:flex; flex-direction:column; gap:4px;
+}
+.stat-cell:last-child{ border-right:none; }
+.stat-num{
+  font-family:"Cormorant Garamond"; font-size:2rem; font-weight:500;
+  color:var(--teal); line-height:1;
+}
+.stat-label{ font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--mist); }
 
-  .grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; }
-  .vial-card{
-    background:var(--white);
-    border:1px solid var(--line);
-    border-radius:2px;
-    overflow:hidden;
-    display:flex; flex-direction:column;
-  }
-  .vial-visual{
-    background:linear-gradient(180deg, #EEF1EF 0%, #E4E8E5 100%);
-    display:flex; align-items:center; justify-content:center;
-    padding:22px 0 10px;
-    border-bottom:1px solid var(--line);
-    height:190px;
-  }
-  .vial-visual svg{ width:118px; height:auto; }
-  .vial-visual img{ height:170px; width:auto; object-fit:contain; }
-  .vial-info{ padding:16px 20px 4px; }
-  .vial-desc{ padding:0 20px 6px; font-size:0.88rem; color:rgba(18,32,30,0.72); flex-grow:1; }
-  .vial-meta{ padding:0 20px 18px; font-size:0.82rem; color:rgba(18,32,30,0.55); }
-  .vial-meta div{ margin-top:2px; }
-  .vial-bottom{
-    border-top:1px solid var(--line); padding:16px 20px;
-    display:flex; align-items:center; justify-content:space-between; gap:12px;
-  }
-  .vial-price{ font-family:"IBM Plex Mono"; font-weight:600; font-size:1.05rem; }
-  .vial-wa{
-    font-size:0.85rem; font-weight:600; text-decoration:none; color:var(--teal-deep);
-    display:flex; align-items:center; gap:6px;
-  }
-  .vial-wa:hover{ color:var(--ink); }
+/* ─── ABOUT ──────────────────────────────────────────────── */
+.about{ padding:100px 0; border-bottom:1px solid var(--line); }
+.about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+.about-label{
+  font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--teal); margin-bottom:20px;
+}
+.about h2{
+  font-family:"Cormorant Garamond"; font-size:2.6rem;
+  font-weight:400; line-height:1.15; color:var(--white);
+}
+.about-divider{ width:40px; height:1px; background:var(--teal); margin:28px 0; }
+.about p{ color:var(--mist); font-size:0.95rem; line-height:1.8; margin-bottom:16px; }
+.about p:last-child{ margin-bottom:0; }
+.about-features{ display:flex; flex-direction:column; gap:20px; }
+.feat{
+  border:1px solid var(--line); padding:22px 24px;
+  display:flex; align-items:flex-start; gap:16px;
+}
+.feat-icon{
+  width:36px; height:36px; flex:none;
+  border:1px solid var(--teal-d); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--teal); font-size:0.85rem; font-family:"Cormorant Garamond";
+}
+.feat-text h4{ font-size:0.85rem; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:4px; color:var(--paper); }
+.feat-text p{ font-size:0.85rem; color:var(--mist); margin:0; }
 
-  .catalog-note{
-    margin-top:34px; font-size:0.85rem; color:rgba(18,32,30,0.6);
-    border-left:2px solid var(--steel); padding-left:14px;
-  }
+/* ─── CATALOG PAGE ───────────────────────────────────────── */
+.page-header{
+  padding:64px 0 48px; border-bottom:1px solid var(--line);
+}
+.page-header .label{
+  font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--teal); margin-bottom:12px;
+}
+.page-header h1{
+  font-family:"Cormorant Garamond"; font-size:3rem; font-weight:400; color:var(--white);
+}
+.page-header p{ color:var(--mist); font-size:0.95rem; max-width:500px; margin-top:12px; }
 
-  /* ---------- COA / verificación ---------- */
-  .coa{ padding:80px 0; border-bottom:1px solid var(--line); background:var(--white); }
-  .coa-grid{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; }
-  .steps{ list-style:none; margin:28px 0 0; padding:0; display:flex; flex-direction:column; gap:22px; }
-  .steps li{ display:flex; gap:16px; }
-  .step-num{
-    flex:none; width:34px; height:34px; border-radius:50%;
-    border:1.5px solid var(--teal-deep); color:var(--teal-deep);
-    display:flex; align-items:center; justify-content:center;
-    font-family:"IBM Plex Mono"; font-weight:600; font-size:0.9rem;
-  }
-  .step-text h3{ font-size:1rem; margin-bottom:4px; }
-  .step-text p{ margin:0; font-size:0.9rem; color:rgba(18,32,30,0.68); }
+.cat-grid{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+  background:var(--line); margin-top:1px;
+}
+.vcard{
+  background:var(--ink); display:flex; flex-direction:column;
+  transition:background .25s;
+}
+.vcard:hover{ background:#161614; }
+.vcard-img{
+  background:linear-gradient(180deg,#1A1A18 0%,#111110 100%);
+  height:240px; display:flex; align-items:center; justify-content:center;
+  overflow:hidden; border-bottom:1px solid var(--line);
+}
+.vcard-img img{
+  height:210px; width:auto; object-fit:contain;
+}
+.vcard-img svg{ width:110px; height:auto; }
+.vcard-body{ padding:24px 26px; flex-grow:1; display:flex; flex-direction:column; }
+.vcard-name{
+  font-family:"Cormorant Garamond"; font-size:1.5rem; font-weight:500;
+  color:var(--white); margin-bottom:4px; line-height:1.15;
+}
+.vcard-sub{
+  font-family:"IBM Plex Mono"; font-size:0.75rem; color:var(--teal);
+  letter-spacing:0.04em; margin-bottom:14px;
+}
+.vcard-desc{ font-size:0.86rem; color:var(--mist); line-height:1.7; flex-grow:1; }
+.vcard-meta{
+  display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;
+}
+.tag{
+  font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase;
+  border:1px solid rgba(23,163,152,0.3); color:var(--teal);
+  padding:4px 9px;
+}
+.vcard-footer{
+  border-top:1px solid var(--line); padding:18px 26px;
+  display:flex; align-items:center; justify-content:flex-end;
+}
+.btn-quote{
+  background:none; border:1px solid var(--teal-d); color:var(--teal);
+  padding:10px 20px; font-size:0.78rem; font-weight:500;
+  letter-spacing:0.1em; text-transform:uppercase; cursor:pointer;
+  display:flex; align-items:center; gap:7px; transition:background .2s, color .2s;
+}
+.btn-quote:hover{ background:var(--teal-d); color:var(--white); }
 
-  .lookup-card{
-    background:var(--paper); border:1px solid var(--line); padding:32px;
-  }
-  .lookup-card h3{ font-size:1.15rem; margin-bottom:6px; }
-  .lookup-card p{ font-size:0.88rem; color:rgba(18,32,30,0.65); margin:0 0 20px; }
-  .lookup-form{ display:flex; gap:10px; }
-  .lookup-form input{
-    flex:1; padding:13px 14px; border:1px solid var(--steel);
-    font-family:"IBM Plex Mono"; font-size:0.95rem; background:var(--white);
-  }
-  .lookup-form input:focus{ outline:2px solid var(--teal-bright); outline-offset:1px; }
-  .lookup-form button{
-    background:var(--ink); color:var(--white); border:none; padding:0 22px;
-    font-weight:600; cursor:pointer; font-size:0.9rem;
-  }
-  .lookup-form button:hover{ background:var(--teal-deep); }
+/* ─── COA PAGE ───────────────────────────────────────────── */
+.coa-wrap{ max-width:660px; margin:0 auto; padding:64px 32px 100px; }
+.coa-wrap .label{ font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal); margin-bottom:12px; }
+.coa-wrap h1{ font-family:"Cormorant Garamond"; font-size:2.6rem; font-weight:400; color:var(--white); margin-bottom:10px; }
+.coa-wrap .subtitle{ color:var(--mist); font-size:0.9rem; margin-bottom:40px; }
 
-  /* ---------- Footer ---------- */
-  footer{ padding:52px 0 40px; }
-  .foot-grid{ display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap; }
-  .foot-brand span{ font-family:"Space Grotesk"; font-weight:700; }
-  .foot-disclaimer{ max-width:480px; font-size:0.8rem; color:rgba(18,32,30,0.55); margin-top:14px; }
-  .foot-contact a{ text-decoration:none; font-weight:600; color:var(--teal-deep); }
+.lote-form{
+  display:flex; gap:0; margin-bottom:48px;
+  border:1px solid rgba(255,255,255,0.12);
+}
+.lote-form input{
+  flex:1; background:rgba(255,255,255,0.04); border:none; outline:none;
+  padding:16px 20px; font-family:"IBM Plex Mono"; font-size:0.95rem;
+  color:var(--paper); placeholder-color:var(--mist);
+}
+.lote-form input::placeholder{ color:var(--mist); opacity:0.6; }
+.lote-form button{
+  background:var(--teal-d); border:none; cursor:pointer;
+  padding:0 26px; color:var(--white); font-size:0.8rem;
+  font-weight:500; letter-spacing:0.1em; text-transform:uppercase;
+  transition:background .2s; white-space:nowrap;
+}
+.lote-form button:hover{ background:var(--teal); }
 
-  /* ---------- WhatsApp floating button ---------- */
-  .wa-float{
-    position:fixed; bottom:24px; right:24px; z-index:60;
-    background:var(--teal-deep); color:var(--white);
-    width:58px; height:58px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 6px 18px rgba(11,93,87,0.35);
-    text-decoration:none;
-  }
-  .wa-float:hover{ background:var(--ink); }
+.coa-steps{
+  display:flex; flex-direction:column; gap:0;
+  border:1px solid var(--line); margin-bottom:40px;
+}
+.coa-step{
+  display:flex; gap:20px; padding:20px 24px;
+  border-bottom:1px solid var(--line);
+}
+.coa-step:last-child{ border-bottom:none; }
+.step-n{
+  font-family:"Cormorant Garamond"; font-size:1.4rem; color:var(--teal);
+  flex:none; width:24px; text-align:center; line-height:1.3;
+}
+.step-t{ font-size:0.88rem; font-weight:500; color:var(--paper); margin-bottom:3px; }
+.step-d{ font-size:0.83rem; color:var(--mist); }
 
-  /* ---------- Hex mark ---------- */
-  .hexmark{ width:22px; height:22px; }
+/* result card */
+.coa-state{ display:none; }
+.coa-state.active{ display:block; }
 
-  @media (max-width: 880px){
-    .hero{ grid-template-columns:1fr; padding-top:52px; }
-    .hero h1{ font-size:2.3rem; }
-    .hero-art{ order:-1; }
-    .about-grid{ grid-template-columns:1fr; gap:24px; }
-    .grid{ grid-template-columns:1fr 1fr; }
-    .coa-grid{ grid-template-columns:1fr; }
-    .strip{ grid-template-columns:1fr; }
-    .strip div{ border-left:none; border-top:1px solid var(--line); }
-    .strip div:first-child{ border-top:none; }
-    nav{ gap:16px; }
-    nav a:not(.btn){ display:none; }
-  }
-  @media (max-width: 560px){
-    .grid{ grid-template-columns:1fr; }
-    .wrap{ padding:0 20px; }
-    .hero h1{ font-size:1.9rem; }
-  }
+.result-card{
+  border:1px solid var(--line); background:rgba(255,255,255,0.03);
+}
+.result-head{
+  background:var(--teal-d); padding:20px 26px;
+}
+.result-head .r-eyebrow{
+  font-family:"IBM Plex Mono"; font-size:0.72rem; color:rgba(255,255,255,0.7);
+  letter-spacing:0.08em; margin-bottom:5px;
+}
+.result-head h2{
+  font-family:"Cormorant Garamond"; font-size:1.8rem; color:var(--white); font-weight:400;
+}
+.result-body{ padding:26px; }
+.result-rows{ display:flex; flex-direction:column; gap:0; margin-bottom:22px; }
+.result-row{
+  display:flex; justify-content:space-between; padding:11px 0;
+  border-bottom:1px solid var(--line); font-size:0.88rem;
+}
+.result-row:last-child{ border-bottom:none; }
+.rr-label{ color:var(--mist); }
+.rr-val{ font-family:"IBM Plex Mono"; font-weight:500; color:var(--paper); }
+.verified-badge{
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--teal); border:1px solid rgba(23,163,152,0.3);
+  padding:5px 12px; margin-bottom:22px;
+}
+.coa-viewer-wrap{
+  border:1px solid var(--line); background:#0D0D0B;
+  min-height:300px; position:relative;
+  user-select:none; -webkit-user-select:none;
+}
+.coa-viewer-wrap img{ width:100%; display:block; pointer-events:none; }
+.coa-viewer-wrap iframe{ width:100%; height:620px; border:none; display:block; }
+.shield-top, .shield-bot{
+  position:absolute; left:0; width:100%;
+  z-index:10; background:transparent; cursor:default; pointer-events:all;
+}
+.shield-top{ top:0; height:44px; }
+.shield-bot{ bottom:0; height:44px; }
+@media(max-width:768px){
+  .shield-top{ height:64px; }
+  .shield-bot{ height:56px; }
+}
+.viewer-error{
+  padding:40px; text-align:center; font-size:0.86rem; color:var(--mist);
+}
+.result-actions{ display:flex; gap:12px; margin-top:18px; flex-wrap:wrap; }
+
+.notice-card{
+  border:1px solid var(--line); padding:32px;
+  background:rgba(255,255,255,0.02);
+}
+.notice-card h3{ font-family:"Cormorant Garamond"; font-size:1.5rem; color:var(--white); margin-bottom:10px; }
+.notice-card p{ color:var(--mist); font-size:0.88rem; line-height:1.7; }
+
+/* ─── CONTACT PAGE ───────────────────────────────────────── */
+.contact-grid{
+  display:grid; grid-template-columns:1fr 1fr; gap:1px;
+  background:var(--line); margin-top:1px;
+}
+.contact-col{
+  background:var(--ink); padding:56px 48px;
+}
+.contact-col .label{ font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal); margin-bottom:16px; }
+.contact-col h2{ font-family:"Cormorant Garamond"; font-size:2rem; color:var(--white); font-weight:400; margin-bottom:20px; }
+.contact-col p{ color:var(--mist); font-size:0.9rem; line-height:1.8; margin-bottom:28px; }
+.contact-items{ display:flex; flex-direction:column; gap:14px; }
+.ci{
+  display:flex; align-items:center; gap:14px;
+  border:1px solid var(--line); padding:16px 20px;
+}
+.ci-icon{ color:var(--teal); font-size:1.1rem; flex:none; }
+.ci-text p{ font-size:0.75rem; color:var(--mist); text-transform:uppercase; letter-spacing:0.08em; }
+.ci-text strong{ font-size:0.92rem; color:var(--paper); font-weight:400; }
+.btn-wa{
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  background:var(--teal-d); color:var(--white); border:none; cursor:pointer;
+  padding:18px 32px; font-size:0.85rem; font-weight:500;
+  letter-spacing:0.1em; text-transform:uppercase; width:100%;
+  margin-top:28px; transition:background .2s;
+}
+.btn-wa:hover{ background:var(--teal); }
+.disclaimer{
+  margin-top:20px; font-size:0.78rem; color:var(--mist);
+  border-left:2px solid var(--teal-d); padding-left:14px; line-height:1.6;
+}
+
+/* ─── FOOTER ─────────────────────────────────────────────── */
+footer{
+  border-top:1px solid var(--line); padding:40px 0;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
+}
+.foot-brand{ font-size:0.78rem; letter-spacing:0.12em; color:var(--mist); }
+.foot-note{ font-size:0.75rem; color:rgba(154,152,147,0.5); max-width:460px; text-align:right; }
+
+/* ─── WA FLOAT ───────────────────────────────────────────── */
+.wa-float{
+  position:fixed; bottom:26px; right:26px; z-index:200;
+  width:54px; height:54px; border-radius:50%;
+  background:var(--teal-d); display:flex; align-items:center; justify-content:center;
+  box-shadow:0 6px 24px rgba(11,93,87,0.5); transition:background .2s;
+}
+.wa-float:hover{ background:var(--teal); }
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+@media(max-width:900px){
+  .nav-links .nav-btn:not(.nav-cta){ display:none; }
+  .hamburger{ display:flex; }
+  .stats{ grid-template-columns:repeat(2,1fr); }
+  .about-grid{ grid-template-columns:1fr; gap:48px; }
+  .cat-grid{ grid-template-columns:1fr 1fr; }
+  .contact-grid{ grid-template-columns:1fr; }
+}
+@media(max-width:560px){
+  .wrap{ padding:0 20px; }
+  .cat-grid{ grid-template-columns:1fr; }
+  .stats{ grid-template-columns:1fr 1fr; }
+  .coa-wrap{ padding:48px 20px 80px; }
+  .contact-col{ padding:40px 24px; }
+  .lote-form{ flex-direction:column; }
+  .lote-form button{ padding:14px; }
+  footer{ flex-direction:column; align-items:flex-start; }
+  .foot-note{ text-align:left; }
+}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="headbar">
-    <a class="brand" href="#top">
-      <svg class="hexmark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <polygon points="26,4 46,15 46,37 26,48 6,37 6,15" fill="none" stroke="#0B5D57" stroke-width="6"/>
-        <polygon points="74,4 94,15 94,37 74,48 54,37 54,15" fill="none" stroke="#12201E" stroke-width="6"/>
-        <polygon points="26,54 46,65 46,87 26,98 6,87 6,65" fill="#17A398"/>
-      </svg>
-      <span>NEXOPEP</span>
-    </a>
-    <nav>
-      <a href="#catalogo">Catálogo</a>
-      <a href="#verificar">Verificar COA</a>
-      <a class="btn btn-solid" id="wa-header" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a>
-    </nav>
+<!-- ─── NAV ──────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <div class="brand" onclick="showPage('home')">
+      <svg width="20" height="20" viewBox="0 0 100 100"><polygon points="26,4 46,15 46,37 26,48 6,37 6,15" fill="none" stroke="#17A398" stroke-width="7"/><polygon points="26,54 46,65 46,87 26,98 6,87 6,65" fill="#17A398"/></svg>
+      <span class="brand-name">NEXOPEP</span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-btn active" data-page="home"    onclick="showPage('home')">Inicio</button>
+      <button class="nav-btn"        data-page="catalog" onclick="showPage('catalog')">Catálogo</button>
+      <button class="nav-btn"        data-page="coa"     onclick="showPage('coa')">Verificar COA</button>
+      <button class="nav-btn"        data-page="contact" onclick="showPage('contact')">Contacto</button>
+      <button class="nav-cta" id="nav-wa">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.9 2.9 4.6 4 .6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.1.2-1.3-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.4c1.4.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.6-1.3l-.3-.2-3 .8.8-2.9-.2-.3C3.9 15 3.4 13.5 3.4 12c0-4.7 3.9-8.6 8.6-8.6s8.6 3.9 8.6 8.6-3.9 8.6-8.6 8.6z"/></svg>
+        Consultar
+      </button>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-</header>
+</nav>
 
-<main id="top">
+<!-- mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mob-btn active" data-page="home"    onclick="showPage('home');toggleMenu()">Inicio</button>
+  <button class="mob-btn"        data-page="catalog" onclick="showPage('catalog');toggleMenu()">Catálogo</button>
+  <button class="mob-btn"        data-page="coa"     onclick="showPage('coa');toggleMenu()">Verificar COA</button>
+  <button class="mob-btn"        data-page="contact" onclick="showPage('contact');toggleMenu()">Contacto</button>
+  <button class="mob-cta" id="mob-wa">Escribir por WhatsApp →</button>
+</div>
 
-  <section class="hero wrap">
-    <div>
-      <div class="eyebrow-line"><span class="dot"></span> Uso exclusivo para investigación</div>
-      <h1>Péptidos con trazabilidad real, lote por lote.</h1>
-      <p class="lead">Nexopep distribuye péptidos para investigación. Cada vial lleva su número de lote, con el que puedes consultar el Certificado de Análisis (COA) original de ese lote específico.</p>
+<!-- ══════════════════════════════════════════════════════════
+     PAGE: HOME
+════════════════════════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="wrap hero-content">
+      <div class="hero-eyebrow">Péptidos para investigación</div>
+      <h1>Ciencia de precisión.<br><em>Pureza verificable.</em></h1>
+      <p class="hero-sub">Nexopep distribuye péptidos con pureza HPLC >99%. Cada lote viene respaldado por su Certificado de Análisis, verificable en esta página.</p>
       <div class="hero-ctas">
-        <a class="btn btn-solid" id="wa-hero" href="#" target="_blank" rel="noopener">Consultar disponibilidad</a>
-        <a class="btn btn-line" href="#catalogo">Ver catálogo</a>
+        <button class="btn-primary" onclick="showPage('catalog')">Ver catálogo</button>
+        <button class="btn-ghost"   onclick="showPage('coa')">Verificar COA</button>
       </div>
     </div>
-    <div class="hero-art">
-      <svg viewBox="0 0 320 380" width="100%" style="max-width:320px" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="130,20 220,68 220,164 130,212 40,164 40,68" fill="none" stroke="#AEB6B8" stroke-width="2"/>
-        <polygon points="130,60 190,92 190,156 130,188 70,156 70,92" fill="none" stroke="#0B5D57" stroke-width="2"/>
-        <polygon points="60,190 150,238 150,334 60,382 -30,334 -30,238" fill="#17A398" opacity="0.12" transform="translate(70,-10)"/>
-        <polygon points="180,150 260,193 260,279 180,322 100,279 100,193" fill="none" stroke="#12201E" stroke-width="2" transform="translate(0,20)"/>
-      </svg>
-    </div>
+    <div class="hero-scroll">Scroll</div>
   </section>
 
-  <section class="strip wrap">
-    <div>
-      <h3>Certificado por lote</h3>
-      <p>Cada vial se verifica con su propio COA, no uno genérico por producto.</p>
+  <!-- STATS -->
+  <div class="stats wrap" style="max-width:100%; padding:0;">
+    <div class="stat-cell wrap" style="max-width:none;">
+      <span class="stat-num">99%<sup style="font-size:1rem">+</sup></span>
+      <span class="stat-label">Pureza HPLC</span>
     </div>
-    <div>
-      <h3>Sin venta en la página</h3>
-      <p>Aquí encuentras la información. Los pedidos se coordinan por WhatsApp.</p>
+    <div class="stat-cell">
+      <span class="stat-num">6</span>
+      <span class="stat-label">Péptidos disponibles</span>
     </div>
-    <div>
-      <h3>Solo investigación</h3>
-      <p>Todos los productos son de uso exclusivo para investigación.</p>
+    <div class="stat-cell">
+      <span class="stat-num">COA</span>
+      <span class="stat-label">Por número de lote</span>
     </div>
-  </section>
-
-  <section class="about wrap">
-    <div class="about-grid">
-      <h2>Sobre Nexopep</h2>
-      <div class="about-body">
-        <p>Nexopep distribuye péptidos para investigación, con un enfoque en la trazabilidad de cada lote. Cada vial que sale de nuestro inventario está respaldado por un Certificado de Análisis (COA) verificable, que puedes consultar ingresando el número de lote impreso en la etiqueta.</p>
-        <p>Esta página es únicamente informativa: no procesamos pagos ni pedidos en línea. Toda consulta, disponibilidad y coordinación de compra se realiza directamente por WhatsApp. Envíos a toda Bolivia🇧🇴.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="catalog wrap" id="catalogo">
-    <div class="section-head">
-      <div>
-        <h2>Catálogo</h2>
-        <p>Precios en bolivianos (Bs). Disponibilidad sujeta a confirmación por WhatsApp.</p>
-      </div>
-    </div>
-
-    <div class="grid" id="catalog-grid"></div>
-
-    <p class="catalog-note">Uso exclusivo para investigación de laboratorio.</p>
-  </section>
-
-  <section class="coa wrap" id="verificar">
-    <div class="coa-grid">
-      <div>
-        <h2>Verifica tu Certificado de Análisis</h2>
-        <ul class="steps">
-          <li>
-            <span class="step-num">1</span>
-            <div class="step-text">
-              <h3>Busca el número de lote</h3>
-              <p>Está impreso en la etiqueta de tu vial, junto al nombre del péptido.</p>
-            </div>
-          </li>
-          <li>
-            <span class="step-num">2</span>
-            <div class="step-text">
-              <h3>Ingrésalo aquí</h3>
-              <p>Escribe el código exactamente como aparece en la etiqueta.</p>
-            </div>
-          </li>
-          <li>
-            <span class="step-num">3</span>
-            <div class="step-text">
-              <h3>Consulta el COA original</h3>
-              <p>Verás el péptido, la concentración, la fecha de análisis y podrás ver o descargar el certificado emitido por el laboratorio.</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="lookup-card">
-        <h3>Verificar por número de lote</h3>
-        <p>Ingresa el código de lote impreso en la etiqueta del vial.</p>
-        <form class="lookup-form" id="lookup-form">
-          <input type="text" id="lookup-input" placeholder="Ej. NXP-0824-A" class="mono" required>
-          <button type="submit">Buscar</button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer class="wrap">
-  <div class="foot-grid">
-    <div class="foot-brand">
-      <span>NEXOPEP</span>
-      <p class="foot-disclaimer">Productos de uso exclusivo para investigación científica. No están destinados al diagnóstico, tratamiento, cura o prevención de ninguna enfermedad.</p>
-    </div>
-    <div class="foot-contact">
-      <p style="margin:0 0 6px; font-size:0.85rem; color:rgba(18,32,30,0.6);">Consultas y pedidos</p>
-      <a id="wa-footer" href="#" target="_blank" rel="noopener">Escribir por WhatsApp →</a>
+    <div class="stat-cell">
+      <span class="stat-num">RUO</span>
+      <span class="stat-label">Research use only</span>
     </div>
   </div>
-</footer>
 
-<a class="wa-float" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.9 2.9 4.6 4 .6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.1.2-1.3-.1-.1-.3-.2-.6-.3z"/>
-    <path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.4c1.4.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.6-1.3l-.3-.2-3 .8.8-2.9-.2-.3C3.9 15 3.4 13.5 3.4 12c0-4.7 3.9-8.6 8.6-8.6s8.6 3.9 8.6 8.6-3.9 8.6-8.6 8.6z"/>
-  </svg>
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="wrap about-grid">
+      <div>
+        <div class="about-label">Sobre Nexopep</div>
+        <h2 class="serif">Trazabilidad real,<br>lote por lote.</h2>
+        <div class="about-divider"></div>
+        <p>Nexopep distribuye péptidos para investigación con un enfoque en la trazabilidad analítica. Cada vial que sale de nuestro inventario está respaldado por un Certificado de Análisis (COA) que puedes consultar directamente con el número de lote de tu etiqueta.</p>
+        <p>No procesamos pagos en línea. Toda consulta y coordinación se realiza directamente por WhatsApp.</p>
+      </div>
+      <div class="about-features">
+        <div class="feat">
+          <div class="feat-icon">I</div>
+          <div class="feat-text">
+            <h4>Pureza HPLC &gt;99%</h4>
+            <p>Cada lote es analizado por cromatografía líquida de alta eficiencia antes de su distribución.</p>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="feat-icon">II</div>
+          <div class="feat-text">
+            <h4>Certificado por lote</h4>
+            <p>El COA es único para cada lote de producción, no un documento genérico por producto.</p>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="feat-icon">III</div>
+          <div class="feat-text">
+            <h4>Solo investigación</h4>
+            <p>Todos los productos son de uso exclusivo para investigación. No destinados al consumo humano.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="wrap">
+    <footer>
+      <span class="foot-brand">NEXOPEP © 2026</span>
+      <p class="foot-note">Productos de uso exclusivo para investigación científica. No destinados al consumo humano ni animal, ni al diagnóstico, tratamiento o prevención de enfermedad alguna.</p>
+    </footer>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     PAGE: CATALOG
+════════════════════════════════════════════════════════════ -->
+<div class="page" id="page-catalog">
+  <div class="wrap">
+    <div class="page-header">
+      <div class="label">Catálogo</div>
+      <h1 class="serif">Péptidos disponibles</h1>
+      <p>Todos los productos cuentan con pureza HPLC >99% y Certificado de Análisis por lote. Para precios y disponibilidad, consulta por WhatsApp.</p>
+    </div>
+  </div>
+
+  <div class="cat-grid" id="catalog-grid"></div>
+
+  <div class="wrap">
+    <p style="font-size:0.78rem; color:var(--mist); padding:24px 0 0; border-top:1px solid var(--line); margin-top:1px;">
+      Uso exclusivo para investigación de laboratorio. No apto para consumo humano ni animal.
+    </p>
+    <footer>
+      <span class="foot-brand">NEXOPEP © 2026</span>
+      <p class="foot-note">Productos de uso exclusivo para investigación científica.</p>
+    </footer>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     PAGE: COA
+════════════════════════════════════════════════════════════ -->
+<div class="page" id="page-coa">
+  <div class="coa-wrap">
+    <div class="label">Trazabilidad</div>
+    <h1 class="serif">Verificar Certificado<br>de Análisis</h1>
+    <p class="subtitle">Ingresa el número de lote impreso en la etiqueta de tu vial para acceder al COA original de ese lote.</p>
+
+    <form class="lote-form" id="lote-form">
+      <input type="text" id="lote-input" placeholder="Número de lote  —  ej. NXP-0824-A" class="mono" autocomplete="off" required>
+      <button type="submit">Buscar</button>
+    </form>
+
+    <!-- Steps -->
+    <div class="coa-steps">
+      <div class="coa-step">
+        <span class="step-n serif">1</span>
+        <div>
+          <div class="step-t">Ubica el número de lote</div>
+          <div class="step-d">Está impreso en la etiqueta de tu vial, junto al nombre del péptido.</div>
+        </div>
+      </div>
+      <div class="coa-step">
+        <span class="step-n serif">2</span>
+        <div>
+          <div class="step-t">Ingrésalo en el campo de búsqueda</div>
+          <div class="step-d">Escribe el código exactamente como aparece en la etiqueta y presiona Buscar.</div>
+        </div>
+      </div>
+      <div class="coa-step">
+        <span class="step-n serif">3</span>
+        <div>
+          <div class="step-t">Consulta el COA original</div>
+          <div class="step-d">Verás el péptido, concentración, fecha de análisis y el certificado emitido por el laboratorio.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- States -->
+    <div class="coa-state" id="coa-loading">
+      <div class="notice-card"><p style="color:var(--mist)">Buscando certificado…</p></div>
+    </div>
+
+    <div class="coa-state" id="coa-not-configured">
+      <div class="notice-card">
+        <h3 class="serif">Sistema en configuración</h3>
+        <p>Los certificados estarán disponibles en breve. Para consultar un lote específico escríbenos directamente.</p>
+        <button class="btn-wa" style="margin-top:20px;" id="wa-not-configured">Escribir por WhatsApp</button>
+      </div>
+    </div>
+
+    <div class="coa-state" id="coa-not-found">
+      <div class="notice-card">
+        <h3 class="serif">Lote no encontrado</h3>
+        <p>Verifica que el código coincida exactamente con el de tu etiqueta. Si el problema continúa, contáctanos.</p>
+        <button class="btn-wa" style="margin-top:20px;" id="wa-not-found">Escribir por WhatsApp</button>
+      </div>
+    </div>
+
+    <div class="coa-state" id="coa-found">
+      <div class="result-card">
+        <div class="result-head">
+          <div class="r-eyebrow mono" id="r-lote"></div>
+          <h2 class="serif" id="r-name"></h2>
+        </div>
+        <div class="result-body">
+          <div class="result-rows">
+            <div class="result-row"><span class="rr-label">Concentración</span><span class="rr-val" id="r-mg"></span></div>
+            <div class="result-row"><span class="rr-label">Fecha de análisis</span><span class="rr-val" id="r-fecha"></span></div>
+            <div class="result-row"><span class="rr-label">Lote</span><span class="rr-val" id="r-lote2"></span></div>
+            <div class="result-row"><span class="rr-label">Pureza</span><span class="rr-val" style="color:var(--teal)">HPLC &gt;99%</span></div>
+          </div>
+          <div class="verified-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#17A398" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Certificado verificado
+          </div>
+          <div class="coa-viewer-wrap" id="coa-viewer"></div>
+          <div class="result-actions">
+            <button class="btn-ghost" id="r-wa" style="font-size:0.8rem; padding:11px 20px;">Consultar este producto</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="wrap"><footer>
+    <span class="foot-brand">NEXOPEP © 2026</span>
+    <p class="foot-note">Uso exclusivo para investigación científica.</p>
+  </footer></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     PAGE: CONTACT
+════════════════════════════════════════════════════════════ -->
+<div class="page" id="page-contact">
+  <div class="wrap">
+    <div class="page-header">
+      <div class="label">Contacto</div>
+      <h1 class="serif">Hablemos</h1>
+      <p>Para cotizaciones, disponibilidad o cualquier consulta técnica sobre nuestros péptidos.</p>
+    </div>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-col">
+      <div class="label">WhatsApp</div>
+      <h2 class="serif">Consultas y cotizaciones</h2>
+      <p>Toda la coordinación de pedidos, precios y disponibilidad se realiza directamente por WhatsApp. Respuesta rápida en horario de atención.</p>
+      <div class="contact-items">
+        <div class="ci">
+          <div class="ci-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#17A398"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.9 2.9 4.6 4 .6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.1.2-1.3-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.4c1.4.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.6-1.3l-.3-.2-3 .8.8-2.9-.2-.3C3.9 15 3.4 13.5 3.4 12c0-4.7 3.9-8.6 8.6-8.6s8.6 3.9 8.6 8.6-3.9 8.6-8.6 8.6z"/></svg>
+          </div>
+          <div class="ci-text">
+            <p>WhatsApp</p>
+            <strong id="contact-num"></strong>
+          </div>
+        </div>
+        <div class="ci">
+          <div class="ci-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#17A398" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="ci-text">
+            <p>Atención</p>
+            <strong>Lunes a Sábado</strong>
+          </div>
+        </div>
+      </div>
+      <button class="btn-wa" id="contact-wa">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.9 2.9 4.6 4 .6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.1.2-1.3-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.4c1.4.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.6-1.3l-.3-.2-3 .8.8-2.9-.2-.3C3.9 15 3.4 13.5 3.4 12c0-4.7 3.9-8.6 8.6-8.6s8.6 3.9 8.6 8.6-3.9 8.6-8.6 8.6z"/></svg>
+        Escribir por WhatsApp
+      </button>
+      <p class="disclaimer">Productos de uso exclusivo para investigación científica. No destinados al consumo humano ni al diagnóstico o tratamiento de enfermedades.</p>
+    </div>
+
+    <div class="contact-col">
+      <div class="label">Cotizar</div>
+      <h2 class="serif">¿Cuánto cuesta?</h2>
+      <p>No publicamos precios en la web ya que pueden variar según disponibilidad y volumen. Escríbenos con el producto que te interesa y te respondemos con el precio actualizado.</p>
+      <div style="display:flex; flex-direction:column; gap:10px;" id="quote-buttons"></div>
+    </div>
+  </div>
+
+  <div class="wrap"><footer>
+    <span class="foot-brand">NEXOPEP © 2026</span>
+    <p class="foot-note">Productos de uso exclusivo para investigación científica.</p>
+  </footer></div>
+</div>
+
+<!-- WA Float -->
+<a class="wa-float" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.9 2.9 4.6 4 .6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.1.2-1.3-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.4c1.4.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.6-1.3l-.3-.2-3 .8.8-2.9-.2-.3C3.9 15 3.4 13.5 3.4 12c0-4.7 3.9-8.6 8.6-8.6s8.6 3.9 8.6 8.6-3.9 8.6-8.6 8.6z"/></svg>
 </a>
 
 <script src="config.js"></script>
 <script>
-  const products = [
-    {
-      name: "Retatrutida",
-      mg: "10 MG",
-      price: "450",
-      desc: "Agonista triple de receptores GLP-1, GIP y glucagón, estudiado en investigación metabólica y de composición corporal.",
-      image: "images/retatrutida-10mg.png"
-    },
-    {
-      name: "Retatrutida",
-      mg: "20 MG",
-      price: "790",
-      desc: "Agonista triple de receptores GLP-1, GIP y glucagón, estudiado en investigación metabólica y de composición corporal.",
-      image: "images/retatrutida-20mg.png"
-    },
-    {
-      name: "GHK-Cu",
-      mg: "50 MG",
-      price: "350",
-      desc: "Péptido de cobre estudiado en investigación de regeneración tisular y biología de la piel.",
-      image: "images/ghk-cu.png"
-    },
-{
-      name: "GHK-Cu",
-      mg: "100 MG",
-      price: "600",
-      desc: "Péptido de cobre estudiado en investigación de regeneración tisular y biología de la piel.",
-      image: "images/ghk-cu-100.png"
-    },
-    {
-      name: "BPC-157",
-      mg: "10 MG",
-      price: "560",
-      desc: "Péptido derivado de una proteína gástrica, utilizado en estudios sobre reparación de tejidos.",
-      image: "images/bpc-157.png"
-    },
-    {
-      name: "Melanotan II",
-      mg: "10 MG",
-      price: "490",
-      desc: "Análogo sintético de la hormona alfa-MSH, empleado en estudios de pigmentación.",
-      image: "images/melanotan-ii.png"
-    },
-    {
-      name: "MOTS-C",
-      mg: "10 MG",
-      price: "540",
-      desc: "Péptido mitocondrial estudiado en investigación de metabolismo energético.",
-      image: "images/mots-c.png"
-    },
-    {
-      name: "Semax",
-      mg: "10 MG",
-      price: "650",
-      desc: "Péptido nootrópico estudiado por su efecto en el enfoque, la memoria y la neuroprotección.",
-      image: "images/semax.png"
-    }
-  ];
+if(typeof NEXOPEP_CONFIG==='undefined') window.NEXOPEP_CONFIG={whatsapp:'59168237696',sheetCsvUrl:'',siteUrl:''};
 
-  // Dibuja un vial completo (tapa, vidrio, etiqueta) en SVG, con el mismo
-  // lenguaje visual de la etiqueta física: franja teal + caja de mg.
-  function vialSVG(name, mg){
-    const nameSize = name.length > 11 ? 10.5 : 12.5;
-    return `
-    <svg viewBox="0 0 160 260" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="80" cy="235" rx="30" ry="10" fill="#F4F1E9"/>
-      <rect x="52" y="160" width="56" height="70" rx="3" fill="#F7F8F6" stroke="#D8DCD9" stroke-width="1"/>
-      <path d="M40 92 h80 v122 a12 12 0 0 1 -12 12 h-56 a12 12 0 0 1 -12 -12 z" fill="#EAF0EE" stroke="#C7CFCB" stroke-width="1.5"/>
-      <rect x="46" y="86" width="68" height="14" rx="2" fill="#DCE3E0" stroke="#B9C2BE" stroke-width="1"/>
-      <rect x="54" y="30" width="52" height="62" rx="6" fill="#B9C0C2" stroke="#8D9598" stroke-width="1.5"/>
-      <rect x="54" y="30" width="52" height="62" rx="6" fill="none" stroke="#FFFFFF" stroke-width="1" opacity="0.35"/>
-      <line x1="60" y1="38" x2="60" y2="86" stroke="#FFFFFF" stroke-width="1" opacity="0.25"/>
-      <line x1="100" y1="38" x2="100" y2="86" stroke="#FFFFFF" stroke-width="1" opacity="0.25"/>
-      <rect x="34" y="118" width="92" height="96" rx="2" fill="#FFFFFF" stroke="#D8DCD9" stroke-width="1"/>
-      <g transform="translate(42,126)">
-        <polygon points="6,0 12,3.2 12,9.6 6,12.8 0,9.6 0,3.2" fill="none" stroke="#0B5D57" stroke-width="1.6"/>
-        <polygon points="6,13.6 12,16.8 12,23.2 6,26.4 0,23.2 0,16.8" fill="#17A398"/>
-        <text x="17" y="13" font-family="Space Grotesk, sans-serif" font-size="7.5" font-weight="700" fill="#12201E" letter-spacing="0.5">NEXOPEP</text>
-      </g>
-      <rect x="42" y="152" width="76" height="1.4" fill="#0B5D57"/>
-      <rect x="42" y="160" width="76" height="17" fill="#0B5D57"/>
-      <text x="80" y="172" font-family="Space Grotesk, sans-serif" font-size="${nameSize}" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="0.3">${name.toUpperCase()}</text>
-      <rect x="42" y="184" width="42" height="15" rx="1" fill="none" stroke="#12201E" stroke-width="1.3"/>
-      <text x="63" y="194.5" font-family="IBM Plex Mono, monospace" font-size="8.5" font-weight="600" fill="#12201E" text-anchor="middle">${mg}</text>
-      <text x="42" y="209" font-family="IBM Plex Sans, sans-serif" font-size="6" fill="#12201E">99% Pureza</text>
-      <text x="42" y="217" font-family="IBM Plex Sans, sans-serif" font-size="6" fill="#12201E">Uso exclusivo investigación</text>
-      <rect x="42" y="152" width="1.4" height="62" fill="#0B5D57"/>
-    </svg>`;
-  }
+const WA = NEXOPEP_CONFIG.whatsapp;
+function waLink(t){ return `https://wa.me/${WA}?text=${encodeURIComponent(t)}`; }
 
-  // Si config.js no cargó (por ejemplo, si index.html se abrió solo, sin el
-  // resto de la carpeta), usamos un respaldo para que la página no se rompa.
-  if (typeof NEXOPEP_CONFIG === 'undefined') {
-    console.warn('config.js no se cargó: usando valores de respaldo.');
-    window.NEXOPEP_CONFIG = { whatsapp: "59168237696", sheetCsvUrl: "", siteUrl: "" };
-  }
+// ── WA links ──
+const WA_GEN = waLink('Hola Nexopep, tengo una consulta sobre sus péptidos.');
+document.getElementById('nav-wa').onclick      = ()=>window.open(WA_GEN,'_blank');
+document.getElementById('mob-wa').onclick      = ()=>window.open(WA_GEN,'_blank');
+document.getElementById('wa-float').href       = WA_GEN;
+document.getElementById('contact-wa').onclick  = ()=>window.open(WA_GEN,'_blank');
+document.getElementById('wa-not-configured').onclick = ()=>window.open(waLink('Hola Nexopep, quisiera consultar sobre el certificado de un lote.'),'_blank');
+document.getElementById('wa-not-found').onclick      = ()=>window.open(waLink('Hola Nexopep, no encontré el certificado de mi lote.'),'_blank');
+document.getElementById('contact-num').textContent = '+' + WA;
 
-  const waNumber = NEXOPEP_CONFIG.whatsapp;
-
-  function waLink(text){
-    return `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
-  }
-
-  document.getElementById('wa-header').href = waLink("Hola Nexopep, tengo una consulta sobre sus péptidos.");
-  document.getElementById('wa-hero').href = waLink("Hola Nexopep, quisiera consultar disponibilidad de un péptido.");
-  document.getElementById('wa-footer').href = waLink("Hola Nexopep, tengo una consulta sobre sus péptidos.");
-  document.getElementById('wa-float').href = waLink("Hola Nexopep, tengo una consulta sobre sus péptidos.");
-
-  const grid = document.getElementById('catalog-grid');
-  grid.innerHTML = products.map((p, i) => `
-    <article class="vial-card">
-      <div class="vial-visual">${p.image ? `<img data-idx="${i}" class="vial-img" src="${p.image}" alt="Vial de ${p.name} ${p.mg}">` : vialSVG(p.name, p.mg)}</div>
-      <div class="vial-info">
-        <div style="font-family:'Space Grotesk'; font-weight:700; font-size:1.02rem;">${p.name} <span class="mono" style="font-weight:600; font-size:0.85rem; color:rgba(18,32,30,0.6);">${p.mg}</span></div>
-      </div>
-      <p class="vial-desc">${p.desc}</p>
-      <div class="vial-meta">
-        <div>99% Pureza</div>
-        <div>Uso exclusivo para investigación</div>
-      </div>
-      <div class="vial-bottom">
-        <span class="vial-price mono">Bs ${p.price}</span>
-        <a class="vial-wa" href="${waLink(`Hola, quisiera consultar sobre ${p.name} ${p.mg}.`)}" target="_blank" rel="noopener">Consultar →</a>
-      </div>
-    </article>
-  `).join('');
-
-  // Si la foto del vial no existe todavía (archivo no subido o nombre distinto),
-  // mostramos automáticamente el dibujo de respaldo en su lugar, sin romper la página.
-  document.querySelectorAll('.vial-img').forEach(img => {
-    img.addEventListener('error', function () {
-      const p = products[this.dataset.idx];
-      this.parentElement.innerHTML = vialSVG(p.name, p.mg);
-    });
+// ── Page switcher ──
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('[data-page]').forEach(b=>{
+    b.classList.toggle('active', b.dataset.page===id);
   });
+  window.scrollTo(0,0);
+}
+function toggleMenu(){
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
 
-  document.getElementById('lookup-form').addEventListener('submit', function(e){
-    e.preventDefault();
-    const val = document.getElementById('lookup-input').value.trim();
-    if(val){
-      window.location.href = `coa.html?lote=${encodeURIComponent(val)}`;
-    }
+// ── Products ──
+const products=[
+  {name:'Retatrutida', mg:'10 MG', desc:'Agonista triple de receptores GLP-1, GIP y glucagón, investigado en estudios de regulación metabólica y composición corporal.', image:'images/retatrutida-10mg.png'},
+  {name:'Retatrutida', mg:'20 MG', desc:'Agonista triple de receptores GLP-1, GIP y glucagón, investigado en estudios de regulación metabólica y composición corporal.', image:'images/retatrutida-20mg.png'},
+  {name:'GHK-Cu',      mg:'50 MG', desc:'Péptido de cobre estudiado en investigación de regeneración tisular, síntesis de colágeno y biología de la piel.', image:'images/ghk-cu.png'},
+  {name:'BPC-157',     mg:'10 MG', desc:'Péptido derivado de una proteína gástrica, utilizado en estudios sobre reparación de tejidos y recuperación musculotendinosa.', image:'images/bpc-157.png'},
+  {name:'Melanotan II',mg:'10 MG', desc:'Análogo sintético de la hormona alfa-MSH empleado en estudios de pigmentación cutánea.', image:'images/melanotan-ii.png'},
+  {name:'MOTS-C',      mg:'10 MG', desc:'Péptido mitocondrial investigado en estudios de metabolismo energético, sensibilidad a insulina y longevidad celular.', image:'images/mots-c.png'},
+];
+
+function vialSVG(name,mg){
+  const ns=name.length>11?10:12.5;
+  return `<svg viewBox="0 0 160 260" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="80" cy="235" rx="30" ry="10" fill="#050503"/>
+    <path d="M40 92 h80 v122 a12 12 0 0 1-12 12 h-56 a12 12 0 0 1-12-12 z" fill="#1A1A17" stroke="#2A2A25" stroke-width="1.5"/>
+    <rect x="46" y="86" width="68" height="14" rx="2" fill="#252521" stroke="#2A2A25" stroke-width="1"/>
+    <rect x="54" y="30" width="52" height="62" rx="6" fill="#888" stroke="#666" stroke-width="1.5"/>
+    <rect x="54" y="30" width="52" height="62" rx="6" fill="none" stroke="#fff" stroke-width="1" opacity="0.15"/>
+    <rect x="34" y="118" width="92" height="96" rx="2" fill="#F7F6F2" stroke="#DDD" stroke-width="1"/>
+    <g transform="translate(42,126)">
+      <polygon points="6,0 12,3.2 12,9.6 6,12.8 0,9.6 0,3.2" fill="none" stroke="#0B5D57" stroke-width="1.6"/>
+      <polygon points="6,13.6 12,16.8 12,23.2 6,26.4 0,23.2 0,16.8" fill="#17A398"/>
+      <text x="17" y="13" font-family="IBM Plex Sans,sans-serif" font-size="7" font-weight="600" fill="#111" letter-spacing="0.5">NEXOPEP</text>
+    </g>
+    <rect x="42" y="152" width="76" height="1.4" fill="#0B5D57"/>
+    <rect x="42" y="160" width="76" height="17" fill="#0B5D57"/>
+    <text x="80" y="172" font-family="IBM Plex Sans,sans-serif" font-size="${ns}" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="0.3">${name.toUpperCase()}</text>
+    <rect x="42" y="184" width="42" height="15" rx="1" fill="none" stroke="#111" stroke-width="1.3"/>
+    <text x="63" y="194.5" font-family="IBM Plex Mono,monospace" font-size="8" font-weight="600" fill="#111" text-anchor="middle">${mg}</text>
+    <text x="42" y="209" font-family="IBM Plex Sans,sans-serif" font-size="5.5" fill="#555">HPLC &gt;99% Pureza</text>
+    <text x="42" y="217" font-family="IBM Plex Sans,sans-serif" font-size="5.5" fill="#555">Research Use Only</text>
+    <rect x="42" y="152" width="1.4" height="62" fill="#0B5D57"/>
+  </svg>`;
+}
+
+// render catalog
+const grid=document.getElementById('catalog-grid');
+grid.innerHTML=products.map((p,i)=>`
+  <div class="vcard">
+    <div class="vcard-img">${p.image?`<img data-idx="${i}" class="vial-img" src="${p.image}" alt="${p.name}">`:vialSVG(p.name,p.mg)}</div>
+    <div class="vcard-body">
+      <div class="vcard-name serif">${p.name}</div>
+      <div class="vcard-sub mono">${p.mg} · HPLC &gt;99%</div>
+      <p class="vcard-desc">${p.desc}</p>
+      <div class="vcard-meta">
+        <span class="tag">Research Use Only</span>
+        <span class="tag">Liofilizado</span>
+      </div>
+    </div>
+    <div class="vcard-footer">
+      <button class="btn-quote" onclick="window.open('${waLink(`Hola Nexopep, quisiera cotizar ${p.name} ${p.mg}.`)}','_blank')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="#17A398"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.9 2.9 4.6 4 .6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.1.2-1.3-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.4c1.4.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.6-1.3l-.3-.2-3 .8.8-2.9-.2-.3C3.9 15 3.4 13.5 3.4 12c0-4.7 3.9-8.6 8.6-8.6s8.6 3.9 8.6 8.6-3.9 8.6-8.6 8.6z"/></svg>
+        Cotizar por WhatsApp
+      </button>
+    </div>
+  </div>
+`).join('');
+
+// fallback SVG si imagen no existe
+document.querySelectorAll('.vial-img').forEach(img=>{
+  img.addEventListener('error',function(){
+    const p=products[this.dataset.idx];
+    this.parentElement.innerHTML=vialSVG(p.name,p.mg);
   });
+});
+
+// quote buttons in contact page
+document.getElementById('quote-buttons').innerHTML=products.map(p=>`
+  <button class="btn-quote" style="justify-content:center;" onclick="window.open('${waLink(`Hola Nexopep, quisiera cotizar ${p.name} ${p.mg}.`)}','_blank')">
+    Cotizar ${p.name} ${p.mg}
+  </button>
+`).join('');
+
+// ── COA logic ──
+function coaState(id){
+  document.querySelectorAll('.coa-state').forEach(el=>el.classList.remove('active'));
+  document.getElementById('coa-'+id).classList.add('active');
+}
+function parseCSV(text){
+  const rows=[];let row=[],field='',inQ=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(inQ){if(c==='"'){if(text[i+1]==='"'){field+='"';i++;}else inQ=false;}else field+=c;}
+    else{if(c==='"')inQ=true;else if(c===','){row.push(field);field='';}else if(c==='\n'){row.push(field);rows.push(row);row=[];field='';}else if(c!=='\r')field+=c;}
+  }
+  if(field.length||row.length){row.push(field);rows.push(row);}
+  return rows.filter(r=>r.some(c=>c.trim()!==''));
+}
+function norm(s){return(s||'').trim().toLowerCase();}
+function driveId(url){const m=url.match(/\/d\/([a-zA-Z0-9_-]{20,})/);return m?m[1]:null;}
+
+document.getElementById('lote-form').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const lote=document.getElementById('lote-input').value.trim();
+  if(!lote)return;
+  if(!NEXOPEP_CONFIG.sheetCsvUrl){coaState('not-configured');return;}
+  coaState('loading');
+  try{
+    const res=await fetch(NEXOPEP_CONFIG.sheetCsvUrl,{cache:'no-store'});
+    const text=await res.text();
+    const rows=parseCSV(text);
+    const hdr=rows[0].map(h=>norm(h));
+    const iL=hdr.indexOf('lote'),iP=hdr.indexOf('peptido'),iM=hdr.indexOf('mg'),iF=hdr.indexOf('fecha'),iI=hdr.indexOf('imagen_url');
+    const match=rows.slice(1).find(r=>norm(r[iL])===norm(lote));
+    if(!match){coaState('not-found');return;}
+    document.getElementById('r-lote').textContent='LOTE '+match[iL];
+    document.getElementById('r-lote2').textContent=match[iL];
+    document.getElementById('r-name').textContent=match[iP]+' — '+match[iM];
+    document.getElementById('r-mg').textContent=match[iM];
+    document.getElementById('r-fecha').textContent=match[iF]||'—';
+    document.getElementById('r-wa').onclick=()=>window.open(waLink(`Hola Nexopep, consulta sobre lote ${match[iL]} (${match[iP]}).`),'_blank');
+    const rawUrl=match[iI].trim();
+    const did=driveId(rawUrl);
+    const isPdf=rawUrl.toLowerCase().includes('.pdf');
+    const embedUrl=did?`https://drive.google.com/file/d/${did}/preview`:rawUrl;
+    const viewer=document.getElementById('coa-viewer');
+    viewer.innerHTML='';
+    if(did||isPdf){
+      const iframe=document.createElement('iframe');
+      iframe.src=embedUrl;iframe.title='COA';iframe.allow='autoplay';
+      viewer.appendChild(iframe);
+      ['shield-top','shield-bot'].forEach(cls=>{
+        const s=document.createElement('div');s.className=cls;
+        s.addEventListener('contextmenu',e=>e.preventDefault());
+        viewer.appendChild(s);
+      });
+    }else{
+      const img=document.createElement('img');
+      img.alt='COA';img.src=embedUrl;img.draggable=false;
+      img.addEventListener('contextmenu',e=>e.preventDefault());
+      img.onerror=()=>{viewer.innerHTML='<div class="viewer-error">No se pudo mostrar el certificado. Contacta a Nexopep por WhatsApp.</div>';};
+      viewer.appendChild(img);
+    }
+    viewer.addEventListener('contextmenu',e=>e.preventDefault());
+    coaState('found');
+  }catch(err){console.error(err);coaState('not-found');}
+});
 </script>
-
 </body>
 </html>
