@@ -7,5 +7,5 @@ const NEXOPEP_CONFIG = {
 
   // Public CSV link of your Google Sheet of certificates (COA).
   // See INSTRUCCIONES.md for how to get it.
-  sheetCsvUrl: ""
+  sheetCsvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWTnNPhbJiiKYLNvVDrmOVOzWPy4PGopzEKyAH1jU7tupslo5N6RvbdIr-I_bI7jkJDwQ9CD0MwQWq/pub?gid=0&single=true&output=csv"
 };
