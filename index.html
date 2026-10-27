@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en" class="i18n-pending">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -7,7 +7,9 @@
 <meta name="description" content="Nexopep — Péptidos para investigación con pureza HPLC >99%. Certificado de análisis verificable por número de lote.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>setTimeout(function(){document.documentElement.classList.remove("i18n-pending")},1500)</script>
 <style>
+.i18n-pending body{visibility:hidden}
 /* ─── TOKENS — MODO DÍA (predeterminado) ─────────────────── */
 :root{
   --black:   #F4F3EF;
@@ -535,6 +537,17 @@ footer{
   footer{ flex-direction:column; align-items:flex-start; }
   .foot-note{ text-align:left; }
 }
+
+.hero-loc{display:flex;align-items:center;gap:8px;margin-top:20px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.f-row{margin-bottom:16px}.f-row>label{display:block;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mist);margin-bottom:6px}
+.f-row input[type=text],.f-row input[type=email],.f-row input[type=number],.f-row select,.f-row textarea{width:100%;background:transparent;border:1px solid var(--line);color:var(--paper);padding:13px 14px;font:inherit;font-size:.92rem;outline:none;border-radius:0}
+.f-row input:focus,.f-row select:focus,.f-row textarea:focus{border-color:var(--teal)}
+.f-row select option{background:var(--vcard-bg);color:var(--paper)}
+.f-radios{display:flex;flex-direction:column;gap:8px}.f-radios label{display:flex;align-items:center;gap:8px;font-size:.88rem;color:var(--paper);text-transform:none;letter-spacing:0;margin:0}
+.f-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.f-status{margin-top:14px;font-size:.86rem;min-height:1.2em}.f-status.ok{color:var(--teal)}.f-status.err{color:#c0392b}
+.contact-col .ci-text p{margin:0}.contact-col .ci-text a{color:var(--teal)}
+@media(max-width:560px){.nav-cta{display:none}.f-2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -551,10 +564,8 @@ footer{
       <button class="nav-btn"        data-page="catalog" onclick="showPage('catalog')">Catálogo</button>
       <button class="nav-btn"        data-page="coa"     onclick="showPage('coa')">Verificar COA</button>
       <button class="nav-btn"        data-page="contact" onclick="showPage('contact')">Contacto</button>
-      <button class="nav-cta" id="nav-wa">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.9 2.9 4.6 4 .6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.1.2-1.3-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.4c1.4.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.6-1.3l-.3-.2-3 .8.8-2.9-.2-.3C3.9 15 3.4 13.5 3.4 12c0-4.7 3.9-8.6 8.6-8.6s8.6 3.9 8.6 8.6-3.9 8.6-8.6 8.6z"/></svg>
-        Consultar
-      </button>
+      <button class="nav-cta" onclick="showPage('contact')">Consultar</button>
+      <button class="theme-toggle" id="lang-toggle" aria-label="Language" style="font-size:.68rem;font-weight:500">ES</button>
       <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
         <!-- sol = modo día visible cuando estamos en dark -->
         <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -574,7 +585,7 @@ footer{
   <button class="mob-btn"        data-page="catalog" onclick="showPage('catalog');toggleMenu()">Catálogo</button>
   <button class="mob-btn"        data-page="coa"     onclick="showPage('coa');toggleMenu()">Verificar COA</button>
   <button class="mob-btn"        data-page="contact" onclick="showPage('contact');toggleMenu()">Contacto</button>
-  <button class="mob-cta" id="mob-wa">Escribir por WhatsApp →</button>
+  <button class="mob-cta" onclick="showPage('contact');toggleMenu()">Enviar consulta →</button>
 </div>
 
 <!-- ══════════════════════════════════════════════════════════
@@ -592,6 +603,7 @@ footer{
         <div class="hero-eyebrow">Péptidos para investigación</div>
         <h1>Ciencia de<br>precisión.<br><em>Pureza<br>verificable.</em></h1>
         <p class="hero-sub">Nexopep distribuye péptidos con pureza HPLC >99%. Cada lote viene respaldado por su Certificado de Análisis, verificable en esta página.</p>
+        <div class="hero-loc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Suroeste de Georgia, Estados Unidos</span></div>
         <div class="hero-ctas">
           <button class="btn-primary" onclick="showPage('catalog')">Ver catálogo</button>
           <button class="btn-ghost"   onclick="showPage('coa')">Verificar COA</button>
@@ -661,8 +673,8 @@ footer{
       <span class="stat-label">Pureza HPLC</span>
     </div>
     <div class="stat-cell">
-      <span class="stat-num">USA TESTED</span>
-      <span class="stat-label">CERTIFICACIÓN AMERICANA🇺🇸</span>
+      <span class="stat-num">6</span>
+      <span class="stat-label">Péptidos disponibles</span>
     </div>
     <div class="stat-cell">
       <span class="stat-num">COA</span>
@@ -682,7 +694,7 @@ footer{
         <h2 class="serif">Trazabilidad real,<br>lote por lote.</h2>
         <div class="about-divider"></div>
         <p>Nexopep distribuye péptidos para investigación con un enfoque en la trazabilidad analítica. Cada vial que sale de nuestro inventario está respaldado por un Certificado de Análisis (COA) que puedes consultar directamente con el número de lote de tu etiqueta.</p>
-        <p>No procesamos pagos en línea. Toda consulta y coordinación se realiza directamente por WhatsApp.</p>
+        <p>No procesamos pagos en línea. Toda consulta y coordinación se realiza mediante nuestro formulario de consulta y por correo electrónico.</p>
       </div>
       <div class="about-features">
         <div class="feat">
@@ -706,6 +718,13 @@ footer{
             <p>Todos los productos son de uso exclusivo para investigación. No destinados al consumo humano.</p>
           </div>
         </div>
+        <div class="feat">
+          <div class="feat-icon">IV</div>
+          <div class="feat-text">
+            <h4>Suroeste de Georgia, EE. UU.</h4>
+            <p>Nuestra sede de operaciones se encuentra en el suroeste de Georgia, Estados Unidos.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -713,7 +732,7 @@ footer{
   <!-- FOOTER -->
   <div class="wrap">
     <footer>
-      <span class="foot-brand">NEXOPEP © 2026</span>
+      <span class="foot-brand">NEXOPEP © 2026 · Suroeste de Georgia, Estados Unidos</span>
       <p class="foot-note">Productos de uso exclusivo para investigación científica. No destinados al consumo humano ni animal, ni al diagnóstico, tratamiento o prevención de enfermedad alguna.</p>
     </footer>
   </div>
@@ -727,7 +746,7 @@ footer{
     <div class="page-header">
       <div class="label">Catálogo</div>
       <h1 class="serif">Péptidos disponibles</h1>
-      <p>Todos los productos cuentan con pureza HPLC >99% y Certificado de Análisis por lote. Para precios y disponibilidad, consulta por WhatsApp.</p>
+      <p>Todos los productos cuentan con pureza HPLC >99% y Certificado de Análisis por lote. Para precios y disponibilidad, solicita una cotización.</p>
     </div>
   </div>
 
@@ -738,7 +757,7 @@ footer{
       Uso exclusivo para investigación de laboratorio. No apto para consumo humano ni animal.
     </p>
     <footer>
-      <span class="foot-brand">NEXOPEP © 2026</span>
+      <span class="foot-brand">NEXOPEP © 2026 · Suroeste de Georgia, Estados Unidos</span>
       <p class="foot-note">Productos de uso exclusivo para investigación científica.</p>
     </footer>
   </div>
@@ -791,8 +810,8 @@ footer{
     <div class="coa-state" id="coa-not-configured">
       <div class="notice-card">
         <h3 class="serif">Sistema en configuración</h3>
-        <p>Los certificados estarán disponibles en breve. Para consultar un lote específico escríbenos directamente.</p>
-        <button class="btn-wa" style="margin-top:20px;" id="wa-not-configured">Escribir por WhatsApp</button>
+        <p>Los certificados estarán disponibles en breve. Para consultar un lote específico, envíanos una consulta.</p>
+        <button class="btn-wa" style="margin-top:20px;" onclick="openInquiry()">Enviar consulta</button>
       </div>
     </div>
 
@@ -800,7 +819,7 @@ footer{
       <div class="notice-card">
         <h3 class="serif">Lote no encontrado</h3>
         <p>Verifica que el código coincida exactamente con el de tu etiqueta. Si el problema continúa, contáctanos.</p>
-        <button class="btn-wa" style="margin-top:20px;" id="wa-not-found">Escribir por WhatsApp</button>
+        <button class="btn-wa" style="margin-top:20px;" onclick="openInquiry()">Enviar consulta</button>
       </div>
     </div>
 
@@ -815,7 +834,7 @@ footer{
             <div class="result-row"><span class="rr-label">Concentración</span><span class="rr-val" id="r-mg"></span></div>
             <div class="result-row"><span class="rr-label">Fecha de análisis</span><span class="rr-val" id="r-fecha"></span></div>
             <div class="result-row"><span class="rr-label">Lote</span><span class="rr-val" id="r-lote2"></span></div>
-            <div class="result-row"><span class="rr-label">Pureza</span><span class="rr-val" style="color:var(--teal)">HPLC &gt;99%</span></div>
+            <div class="result-row"><span class="rr-label">Pureza (HPLC)</span><span class="rr-val" style="color:var(--teal)">HPLC &gt;99%</span></div>
           </div>
           <div class="verified-badge">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#17A398" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -831,7 +850,7 @@ footer{
 
   </div>
   <div class="wrap"><footer>
-    <span class="foot-brand">NEXOPEP © 2026</span>
+    <span class="foot-brand">NEXOPEP © 2026 · Suroeste de Georgia, Estados Unidos</span>
     <p class="foot-note">Uso exclusivo para investigación científica.</p>
   </footer></div>
 </div>
@@ -844,64 +863,55 @@ footer{
     <div class="page-header">
       <div class="label">Contacto</div>
       <h1 class="serif">Hablemos</h1>
-      <p>Para cotizaciones, disponibilidad o cualquier consulta técnica sobre nuestros péptidos.</p>
+      <p>Para cotizaciones, disponibilidad o consultas técnicas sobre nuestros péptidos, completa el formulario y te responderemos por correo electrónico.</p>
     </div>
   </div>
-
   <div class="contact-grid">
     <div class="contact-col">
-      <div class="label">WhatsApp</div>
-      <h2 class="serif">Consultas y cotizaciones</h2>
-      <p>Toda la coordinación de pedidos, precios y disponibilidad se realiza directamente por WhatsApp. Respuesta rápida en horario de atención.</p>
+      <div class="label">Formulario de consulta</div>
+      <h2 class="serif">Solicitar cotización</h2>
+      <form id="inq-form">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="f-2">
+          <div class="f-row"><label for="f-name">Nombre completo</label><input type="text" id="f-name" name="name" required></div>
+          <div class="f-row"><label for="f-email">Correo electrónico</label><input type="email" id="f-email" name="email" required></div>
+        </div>
+        <div class="f-row"><label>¿La consulta es para una empresa?</label>
+          <div class="f-radios">
+            <label><input type="radio" name="buyer_type" value="Individual" checked> Individual / investigador independiente</label>
+            <label><input type="radio" name="buyer_type" value="Company"> Empresa o institución</label>
+          </div>
+        </div>
+        <div class="f-row" id="f-company-row" style="display:none"><label for="f-company">Nombre de la empresa</label><input type="text" id="f-company" name="company"></div>
+        <div class="f-2">
+          <div class="f-row"><label for="f-peptide">Péptido</label><select id="f-peptide" name="peptide" required></select></div>
+          <div class="f-row"><label for="f-qty">Cantidad (viales)</label><input type="number" id="f-qty" name="quantity" min="1" value="1" required></div>
+        </div>
+        <div class="f-row"><label for="f-message">Mensaje (opcional)</label><textarea id="f-message" name="message" rows="4"></textarea></div>
+        <button type="submit" class="btn-wa" style="margin-top:8px">Enviar consulta</button>
+        <div class="f-status" id="f-status" role="status"></div>
+      </form>
+    </div>
+    <div class="contact-col">
+      <div class="label">Contacto directo</div>
+      <h2 class="serif">Correo y ubicación</h2>
+      <p>Toda consulta, cotización y coordinación de pedidos se gestiona por correo electrónico.</p>
       <div class="contact-items">
-        <div class="ci">
-          <div class="ci-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#17A398"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.9 2.9 4.6 4 .6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.1.2-1.3-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.4c1.4.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.6-1.3l-.3-.2-3 .8.8-2.9-.2-.3C3.9 15 3.4 13.5 3.4 12c0-4.7 3.9-8.6 8.6-8.6s8.6 3.9 8.6 8.6-3.9 8.6-8.6 8.6z"/></svg>
-          </div>
-          <div class="ci-text">
-            <p>WhatsApp</p>
-            <strong id="contact-num"></strong>
-          </div>
-        </div>
-        <div class="ci">
-          <div class="ci-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#17A398" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <div class="ci-text">
-            <p>Atención</p>
-            <strong>Lunes a Sábado 8:00 - 16:00</strong>
-          </div>
-        </div>
+        <div class="ci"><div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#17A398" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></div><div class="ci-text"><p>Correo</p><strong><a href="mailto:support.inquiry@nexopep.site">support.inquiry@nexopep.site</a></strong></div></div>
+        <div class="ci"><div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#17A398" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="ci-text"><p>Ubicación</p><strong>Suroeste de Georgia, Estados Unidos</strong></div></div>
       </div>
-      <button class="btn-wa" id="contact-wa">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.9 2.9 4.6 4 .6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.1.2-1.3-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.4c1.4.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.6-1.3l-.3-.2-3 .8.8-2.9-.2-.3C3.9 15 3.4 13.5 3.4 12c0-4.7 3.9-8.6 8.6-8.6s8.6 3.9 8.6 8.6-3.9 8.6-8.6 8.6z"/></svg>
-        Escribir por WhatsApp
-      </button>
       <p class="disclaimer">Productos de uso exclusivo para investigación científica. No destinados al consumo humano ni al diagnóstico o tratamiento de enfermedades.</p>
     </div>
-
-    <div class="contact-col">
-      <div class="label">Cotizar</div>
-      <h2 class="serif">¿Cuánto cuesta?</h2>
-      <p>No publicamos precios en la web ya que pueden variar según disponibilidad y volumen. Escríbenos con el producto que te interesa y te respondemos con el precio actualizado.</p>
-      <div style="display:flex; flex-direction:column; gap:10px;" id="quote-buttons"></div>
-    </div>
   </div>
-
   <div class="wrap"><footer>
-    <span class="foot-brand">NEXOPEP © 2026</span>
+    <span class="foot-brand">NEXOPEP © 2026 · Suroeste de Georgia, Estados Unidos</span>
     <p class="foot-note">Productos de uso exclusivo para investigación científica.</p>
   </footer></div>
 </div>
 
-<!-- WA Float -->
-<a class="wa-float" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.9 2.9 4.6 4 .6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.1.2-1.3-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.4c1.4.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.6-1.3l-.3-.2-3 .8.8-2.9-.2-.3C3.9 15 3.4 13.5 3.4 12c0-4.7 3.9-8.6 8.6-8.6s8.6 3.9 8.6 8.6-3.9 8.6-8.6 8.6z"/></svg>
-</a>
-
 <script src="config.js"></script>
 <script>
-if(typeof NEXOPEP_CONFIG==='undefined') window.NEXOPEP_CONFIG={whatsapp:'59168237696',sheetCsvUrl:'',siteUrl:''};
+const CFG=Object.assign({sheetCsvUrl:'',contactEmail:'support.inquiry@nexopep.site'},(typeof NEXOPEP_CONFIG!=='undefined')?NEXOPEP_CONFIG:{});
 
 // ── Theme toggle (predeterminado: modo día) ──
 const root = document.documentElement;
@@ -921,18 +931,6 @@ toggleBtn.addEventListener('click', () => {
   }
 });
 
-const WA = NEXOPEP_CONFIG.whatsapp;
-function waLink(t){ return `https://wa.me/${WA}?text=${encodeURIComponent(t)}`; }
-
-// ── WA links ──
-const WA_GEN = waLink('Hola Nexopep, tengo una consulta sobre sus péptidos.');
-document.getElementById('nav-wa').onclick      = ()=>window.open(WA_GEN,'_blank');
-document.getElementById('mob-wa').onclick      = ()=>window.open(WA_GEN,'_blank');
-document.getElementById('wa-float').href       = WA_GEN;
-document.getElementById('contact-wa').onclick  = ()=>window.open(WA_GEN,'_blank');
-document.getElementById('wa-not-configured').onclick = ()=>window.open(waLink('Hola Nexopep, quisiera consultar sobre el certificado de un lote.'),'_blank');
-document.getElementById('wa-not-found').onclick      = ()=>window.open(waLink('Hola Nexopep, no encontré el certificado de mi lote.'),'_blank');
-document.getElementById('contact-num').textContent = '+' + WA;
 
 // ── Page switcher ──
 function showPage(id){
@@ -952,11 +950,9 @@ const products=[
   {name:'Retatrutida', mg:'10 MG', desc:'Agonista triple de receptores GLP-1, GIP y glucagón, investigado en estudios de regulación metabólica y composición corporal.', image:'images/retatrutida-10mg.png'},
   {name:'Retatrutida', mg:'20 MG', desc:'Agonista triple de receptores GLP-1, GIP y glucagón, investigado en estudios de regulación metabólica y composición corporal.', image:'images/retatrutida-20mg.png'},
   {name:'GHK-Cu',      mg:'50 MG', desc:'Péptido de cobre estudiado en investigación de regeneración tisular, síntesis de colágeno y biología de la piel.', image:'images/ghk-cu.png'},
-  {name:'GHK-Cu',      mg:'100 MG', desc:'Péptido de cobre estudiado en investigación de regeneración tisular, síntesis de colágeno y biología de la piel.', image:'images/ghk-cu-100.png'},
   {name:'BPC-157',     mg:'10 MG', desc:'Péptido derivado de una proteína gástrica, utilizado en estudios sobre reparación de tejidos y recuperación musculotendinosa.', image:'images/bpc-157.png'},
   {name:'Melanotan II',mg:'10 MG', desc:'Análogo sintético de la hormona alfa-MSH empleado en estudios de pigmentación cutánea.', image:'images/melanotan-ii.png'},
   {name:'MOTS-C',      mg:'10 MG', desc:'Péptido mitocondrial investigado en estudios de metabolismo energético, sensibilidad a insulina y longevidad celular.', image:'images/mots-c.png'},
- {name:'Semax',      mg:'10 MG', desc:'Péptido sintético investigado por sus posibles efectos en atención, memoria, concentración y funciones cognitivas.', image:'images/semax.png'},
 ];
 
 function vialSVG(name,mg){
@@ -978,49 +974,88 @@ function vialSVG(name,mg){
     <text x="80" y="172" font-family="IBM Plex Sans,sans-serif" font-size="${ns}" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="0.3">${name.toUpperCase()}</text>
     <rect x="42" y="184" width="42" height="15" rx="1" fill="none" stroke="#111" stroke-width="1.3"/>
     <text x="63" y="194.5" font-family="IBM Plex Mono,monospace" font-size="8" font-weight="600" fill="#111" text-anchor="middle">${mg}</text>
-    <text x="42" y="209" font-family="IBM Plex Sans,sans-serif" font-size="5.5" fill="#555">HPLC &gt;99% Pureza</text>
+    <text x="42" y="209" font-family="IBM Plex Sans,sans-serif" font-size="5.5" fill="#555">HPLC &gt;99% Purity</text>
     <text x="42" y="217" font-family="IBM Plex Sans,sans-serif" font-size="5.5" fill="#555">Research Use Only</text>
     <rect x="42" y="152" width="1.4" height="62" fill="#0B5D57"/>
   </svg>`;
 }
 
-// render catalog
+// ── i18n ──
+const NAME_EN={Retatrutida:'Retatrutide'};
+const DESC_EN=['Triple GLP-1, GIP and glucagon receptor agonist, investigated in studies of metabolic regulation and body composition.','Triple GLP-1, GIP and glucagon receptor agonist, investigated in studies of metabolic regulation and body composition.','Copper peptide studied in research on tissue regeneration, collagen synthesis and skin biology.','Peptide derived from a gastric protein, used in studies on tissue repair and musculotendinous recovery.','Synthetic analogue of the hormone alpha-MSH used in skin pigmentation studies.','Mitochondrial peptide investigated in studies of energy metabolism, insulin sensitivity and cellular longevity.'];
+const T={en:{title:'Nexopep — Research peptides',quote:'Request a quote',lyoph:'Lyophilized',other:'Other / multiple',sending:'Sending…',sent:'Thank you — your inquiry was sent. We will reply by email.',fail:'Could not send. Please email us directly at',lotq:(l,p)=>`Question about lot ${l} (${p}).`},
+ es:{title:'Nexopep — Péptidos de investigación',quote:'Solicitar cotización',lyoph:'Liofilizado',other:'Otro / varios',sending:'Enviando…',sent:'Gracias — tu consulta fue enviada. Te responderemos por correo.',fail:'No se pudo enviar. Escríbenos directamente a',lotq:(l,p)=>`Consulta sobre el lote ${l} (${p}).`}};
+const EN=/*EN*/{"Inicio": "Home", "Catálogo": "Catalog", "Verificar COA": "Verify COA", "Contacto": "Contact", "Consultar": "Inquire", "Enviar consulta →": "Send inquiry →", "Péptidos para investigación": "Research peptides", "Ciencia de": "Precision", "precisión.": "science.", "Pureza": "Verifiable", "verificable.": "purity.", "Nexopep distribuye péptidos con pureza HPLC >99%. Cada lote viene respaldado por su Certificado de Análisis, verificable en esta página.": "Nexopep supplies peptides with HPLC purity >99%. Every lot is backed by its Certificate of Analysis, verifiable on this page.", "Suroeste de Georgia, Estados Unidos": "Southwest Georgia, United States", "Ver catálogo": "View catalog", "Pureza HPLC": "HPLC purity", "Péptidos disponibles": "Peptides available", "Por número de lote": "By lot number", "Sobre Nexopep": "About Nexopep", "Trazabilidad real,": "True traceability,", "lote por lote.": "lot by lot.", "Nexopep distribuye péptidos para investigación con un enfoque en la trazabilidad analítica. Cada vial que sale de nuestro inventario está respaldado por un Certificado de Análisis (COA) que puedes consultar directamente con el número de lote de tu etiqueta.": "Nexopep supplies peptides for research with a focus on analytical traceability. Every vial leaving our inventory is backed by a Certificate of Analysis (COA) that you can look up directly with the lot number on your label.", "No procesamos pagos en línea. Toda consulta y coordinación se realiza mediante nuestro formulario de consulta y por correo electrónico.": "We do not process payments online. All inquiries and order coordination are handled through our inquiry form and by email.", "Pureza HPLC >99%": "HPLC purity >99%", "Cada lote es analizado por cromatografía líquida de alta eficiencia antes de su distribución.": "Every lot is analyzed by high-performance liquid chromatography before distribution.", "Certificado por lote": "Certificate per lot", "El COA es único para cada lote de producción, no un documento genérico por producto.": "The COA is unique to each production lot, not a generic document per product.", "Solo investigación": "Research use only", "Todos los productos son de uso exclusivo para investigación. No destinados al consumo humano.": "All products are for research use only. Not intended for human consumption.", "Suroeste de Georgia, EE. UU.": "Southwest Georgia, USA", "Nuestra sede de operaciones se encuentra en el suroeste de Georgia, Estados Unidos.": "Our base of operations is located in Southwest Georgia, United States.", "NEXOPEP © 2026 · Suroeste de Georgia, Estados Unidos": "NEXOPEP © 2026 · Southwest Georgia, United States", "Productos de uso exclusivo para investigación científica. No destinados al consumo humano ni animal, ni al diagnóstico, tratamiento o prevención de enfermedad alguna.": "Products for scientific research use only. Not intended for human or animal consumption, nor for the diagnosis, treatment or prevention of any disease.", "Todos los productos cuentan con pureza HPLC >99% y Certificado de Análisis por lote. Para precios y disponibilidad, solicita una cotización.": "All products have HPLC purity >99% and a Certificate of Analysis per lot. For pricing and availability, request a quote.", "Uso exclusivo para investigación de laboratorio. No apto para consumo humano ni animal.": "For laboratory research use only. Not suitable for human or animal consumption.", "Productos de uso exclusivo para investigación científica.": "Products for scientific research use only.", "Uso exclusivo para investigación científica.": "For scientific research use only.", "Trazabilidad": "Traceability", "Verificar Certificado": "Verify Certificate", "de Análisis": "of Analysis", "Ingresa el número de lote impreso en la etiqueta de tu vial para acceder al COA original de ese lote.": "Enter the lot number printed on your vial label to access the original COA for that lot.", "Buscar": "Search", "Ubica el número de lote": "Locate the lot number", "Está impreso en la etiqueta de tu vial, junto al nombre del péptido.": "It is printed on your vial label, next to the peptide name.", "Ingrésalo en el campo de búsqueda": "Enter it in the search field", "Escribe el código exactamente como aparece en la etiqueta y presiona Buscar.": "Type the code exactly as it appears on the label and press Search.", "Consulta el COA original": "View the original COA", "Verás el péptido, concentración, fecha de análisis y el certificado emitido por el laboratorio.": "You will see the peptide, concentration, analysis date and the certificate issued by the laboratory.", "Buscando certificado…": "Looking up certificate…", "Sistema en configuración": "System being set up", "Los certificados estarán disponibles en breve. Para consultar un lote específico, envíanos una consulta.": "Certificates will be available shortly. To ask about a specific lot, send us an inquiry.", "Enviar consulta": "Send inquiry", "Lote no encontrado": "Lot not found", "Verifica que el código coincida exactamente con el de tu etiqueta. Si el problema continúa, contáctanos.": "Check that the code matches your label exactly. If the problem persists, contact us.", "Concentración": "Concentration", "Fecha de análisis": "Analysis date", "Lote": "Lot", "Pureza (HPLC)": "Purity (HPLC)", "Certificado verificado": "Verified certificate", "Consultar este producto": "Inquire about this product", "Hablemos": "Let's talk", "Para cotizaciones, disponibilidad o consultas técnicas sobre nuestros péptidos, completa el formulario y te responderemos por correo electrónico.": "For quotes, availability or technical questions about our peptides, fill in the form and we will reply by email.", "Formulario de consulta": "Inquiry form", "Solicitar cotización": "Request a quote", "Nombre completo": "Full name", "Correo electrónico": "Email", "¿La consulta es para una empresa?": "Is this inquiry for a company?", "Individual / investigador independiente": "Individual / independent researcher", "Empresa o institución": "Company or institution", "Nombre de la empresa": "Company name", "Péptido": "Peptide", "Cantidad (viales)": "Quantity (vials)", "Mensaje (opcional)": "Message (optional)", "Contacto directo": "Direct contact", "Correo y ubicación": "Email and location", "Toda consulta, cotización y coordinación de pedidos se gestiona por correo electrónico.": "All inquiries, quotes and order coordination are handled by email.", "Correo": "Email", "Ubicación": "Location", "Productos de uso exclusivo para investigación científica. No destinados al consumo humano ni al diagnóstico o tratamiento de enfermedades.": "Products for scientific research use only. Not intended for human consumption nor for the diagnosis or treatment of disease.", "Número de lote  —  ej. NXP-0824-A": "Lot number  —  e.g. NXP-0824-A", "No se pudo mostrar el certificado. Contáctanos por correo electrónico.": "The certificate could not be displayed. Contact us by email."};
+let LANG=localStorage.getItem('nexopep-lang')||'en';
+const t=k=>T[LANG][k];
+const orig=new WeakMap();
+function applyLang(root){
+  root=root||document.body;
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;
+  while(n=w.nextNode()){
+    if(/^(SCRIPT|STYLE)$/.test(n.parentNode.nodeName))continue;
+    if(!orig.has(n))orig.set(n,n.nodeValue);
+    const o=orig.get(n),k=o.trim();
+    if(EN[k])n.nodeValue=LANG==='en'?o.replace(k,EN[k]):o;
+  }
+  root.querySelectorAll('[placeholder]').forEach(e=>{if(!e.dataset.phEs)e.dataset.phEs=e.placeholder;e.placeholder=LANG==='en'&&EN[e.dataset.phEs]?EN[e.dataset.phEs]:e.dataset.phEs;});
+}
+function setLang(){
+  document.documentElement.lang=LANG;document.title=t('title');
+  document.getElementById('lang-toggle').textContent=LANG==='en'?'ES':'EN';
+  renderCatalog();applyLang();
+  document.documentElement.classList.remove('i18n-pending');
+}
+document.getElementById('lang-toggle').onclick=()=>{LANG=LANG==='en'?'es':'en';localStorage.setItem('nexopep-lang',LANG);setLang();};
+
+// ── Catalog ──
 const grid=document.getElementById('catalog-grid');
-grid.innerHTML=products.map((p,i)=>`
+function renderCatalog(){
+  const E=LANG==='en';
+  grid.innerHTML=products.map((p,i)=>{const nm=E?(NAME_EN[p.name]||p.name):p.name;return `
   <div class="vcard">
-    <div class="vcard-img">${p.image?`<img data-idx="${i}" class="vial-img" src="${p.image}" alt="${p.name}">`:vialSVG(p.name,p.mg)}</div>
+    <div class="vcard-img">${p.image?`<img data-idx="${i}" class="vial-img" src="${p.image}" alt="${nm}">`:vialSVG(nm,p.mg)}</div>
     <div class="vcard-body">
-      <div class="vcard-name serif">${p.name}</div>
+      <div class="vcard-name serif">${nm}</div>
       <div class="vcard-sub mono">${p.mg} · HPLC &gt;99%</div>
-      <p class="vcard-desc">${p.desc}</p>
-      <div class="vcard-meta">
-        <span class="tag">Research Use Only</span>
-        <span class="tag">Liofilizado</span>
-      </div>
+      <p class="vcard-desc">${E?DESC_EN[i]:p.desc}</p>
+      <div class="vcard-meta"><span class="tag">Research Use Only</span><span class="tag">${t('lyoph')}</span></div>
     </div>
-    <div class="vcard-footer">
-      <button class="btn-quote" onclick="window.open('${waLink(`Hola Nexopep, quisiera cotizar ${p.name} ${p.mg}.`)}','_blank')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="#17A398"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.9 2.9 4.6 4 .6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.1.2-1.3-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.4c1.4.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.6-1.3l-.3-.2-3 .8.8-2.9-.2-.3C3.9 15 3.4 13.5 3.4 12c0-4.7 3.9-8.6 8.6-8.6s8.6 3.9 8.6 8.6-3.9 8.6-8.6 8.6z"/></svg>
-        Cotizar por WhatsApp
-      </button>
-    </div>
-  </div>
-`).join('');
+    <div class="vcard-footer"><button class="btn-quote" onclick="openInquiry({pep:${i}})">${t('quote')}</button></div>
+  </div>`}).join('');
+  grid.querySelectorAll('.vial-img').forEach(img=>img.addEventListener('error',function(){const p=products[this.dataset.idx];this.parentElement.innerHTML=vialSVG(E?(NAME_EN[p.name]||p.name):p.name,p.mg);}));
+  const sel=document.getElementById('f-peptide'),cur=sel.value;
+  sel.innerHTML=products.map(p=>{const nm=E?(NAME_EN[p.name]||p.name):p.name;return `<option value="${(NAME_EN[p.name]||p.name)} ${p.mg.toLowerCase()}">${nm} ${p.mg}</option>`}).join('')+`<option value="Other / multiple">${t('other')}</option>`;
+  if(cur)sel.value=cur;
+}
 
-// fallback SVG si imagen no existe
-document.querySelectorAll('.vial-img').forEach(img=>{
-  img.addEventListener('error',function(){
-    const p=products[this.dataset.idx];
-    this.parentElement.innerHTML=vialSVG(p.name,p.mg);
-  });
+// ── Inquiry form (sent by email via FormSubmit) ──
+function openInquiry(o){
+  o=o||{};showPage('contact');
+  if(o.pep!==undefined)document.getElementById('f-peptide').selectedIndex=o.pep;
+  if(o.message)document.getElementById('f-message').value=o.message;
+}
+function toggleCompany(){
+  const c=document.querySelector('input[name=buyer_type]:checked').value==='Company';
+  document.getElementById('f-company-row').style.display=c?'':'none';
+  document.getElementById('f-company').required=c;
+}
+document.querySelectorAll('input[name=buyer_type]').forEach(r=>r.addEventListener('change',toggleCompany));
+document.getElementById('inq-form').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const f=e.target,st=document.getElementById('f-status'),btn=f.querySelector('button[type=submit]');
+  const d=Object.fromEntries(new FormData(f));
+  if(d._honey)return;
+  d._subject='Nexopep inquiry — '+d.peptide+' x'+d.quantity;d._template='table';d._captcha='false';
+  btn.disabled=true;st.className='f-status';st.textContent=t('sending');
+  try{
+    const r=await fetch('https://formsubmit.co/ajax/'+CFG.contactEmail,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)});
+    const j=await r.json();
+    if(r.ok&&(j.success===true||j.success==='true')){f.reset();toggleCompany();st.className='f-status ok';st.textContent=t('sent');}
+    else throw new Error(j.message||'fail');
+  }catch(err){st.className='f-status err';st.textContent=t('fail')+' '+CFG.contactEmail;}
+  btn.disabled=false;
 });
-
-// quote buttons in contact page
-document.getElementById('quote-buttons').innerHTML=products.map(p=>`
-  <button class="btn-quote" style="justify-content:center;" onclick="window.open('${waLink(`Hola Nexopep, quisiera cotizar ${p.name} ${p.mg}.`)}','_blank')">
-    Cotizar ${p.name} ${p.mg}
-  </button>
-`).join('');
 
 // ── COA logic ──
 function coaState(id){
@@ -1044,10 +1079,10 @@ document.getElementById('lote-form').addEventListener('submit',async function(e)
   e.preventDefault();
   const lote=document.getElementById('lote-input').value.trim();
   if(!lote)return;
-  if(!NEXOPEP_CONFIG.sheetCsvUrl){coaState('not-configured');return;}
+  if(!CFG.sheetCsvUrl){coaState('not-configured');return;}
   coaState('loading');
   try{
-    const res=await fetch(NEXOPEP_CONFIG.sheetCsvUrl,{cache:'no-store'});
+    const res=await fetch(CFG.sheetCsvUrl,{cache:'no-store'});
     const text=await res.text();
     const rows=parseCSV(text);
     const hdr=rows[0].map(h=>norm(h));
@@ -1059,7 +1094,7 @@ document.getElementById('lote-form').addEventListener('submit',async function(e)
     document.getElementById('r-name').textContent=match[iP]+' — '+match[iM];
     document.getElementById('r-mg').textContent=match[iM];
     document.getElementById('r-fecha').textContent=match[iF]||'—';
-    document.getElementById('r-wa').onclick=()=>window.open(waLink(`Hola Nexopep, consulta sobre lote ${match[iL]} (${match[iP]}).`),'_blank');
+    document.getElementById('r-wa').onclick=()=>openInquiry({message:t('lotq')(match[iL],match[iP])});
     const rawUrl=match[iI].trim();
     const did=driveId(rawUrl);
     const isPdf=rawUrl.toLowerCase().includes('.pdf');
@@ -1079,13 +1114,14 @@ document.getElementById('lote-form').addEventListener('submit',async function(e)
       const img=document.createElement('img');
       img.alt='COA';img.src=embedUrl;img.draggable=false;
       img.addEventListener('contextmenu',e=>e.preventDefault());
-      img.onerror=()=>{viewer.innerHTML='<div class="viewer-error">No se pudo mostrar el certificado. Contacta a Nexopep por WhatsApp.</div>';};
+      img.onerror=()=>{viewer.innerHTML='<div class="viewer-error">No se pudo mostrar el certificado. Contáctanos por correo electrónico.</div>';applyLang(viewer);};
       viewer.appendChild(img);
     }
     viewer.addEventListener('contextmenu',e=>e.preventDefault());
     coaState('found');
   }catch(err){console.error(err);coaState('not-found');}
 });
+setLang();
 </script>
 </body>
 </html>
